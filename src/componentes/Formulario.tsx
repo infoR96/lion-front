@@ -1,6 +1,6 @@
 import { FormikErrors, useFormik } from 'formik';
 
-import '../styles/styles.css'
+
 
 interface FormValues {
     nroVoladura: number;
@@ -53,7 +53,7 @@ export const Formulario = () => {
     });
 
     return (
-        <div>
+        <div className='col'>
             <h1>DATOS GENERALES DE VOLADURA</h1>
 
             <form onSubmit={handleSubmit} noValidate>
