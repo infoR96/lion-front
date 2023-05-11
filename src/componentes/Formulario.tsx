@@ -1,5 +1,5 @@
+import axios from 'axios';
 import { FormikErrors, useFormik } from 'formik';
-
 
 
 interface FormValues {
@@ -12,7 +12,7 @@ interface FormValues {
 
 export const Formulario = () => {
 
-    const validate = ({ nroVoladura, fase, fecha,nivel, malla, }: FormValues) => {
+    const validate = ({ nroVoladura, fase, fecha, nivel, malla, }: FormValues) => {
 
         const errors: FormikErrors<FormValues> = {};
 
@@ -47,13 +47,19 @@ export const Formulario = () => {
             malla: ''
         },
         onSubmit: (values) => {
-            console.log(values);
+            axios.post('http://localhost:8081/api/voladuras', values)
+                .then(response => {
+                    console.log('Se envió la información correctamente', response.data);
+                })
+                .catch(error => {
+                    console.log('Error al enviar la información', error);
+                });
         },
         validate
     });
 
     return (
-        <div className='col'>
+        <div className='col my-4'>
             <h1>DATOS GENERALES DE VOLADURA</h1>
 
             <form onSubmit={handleSubmit} noValidate>

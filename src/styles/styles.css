@@ -52,3 +52,15 @@ span, .error-message {
     background-color: #f2f2f2;
   }
   
+  /* botones de opciones */
+   
+  .horizontal-container{
+    display: flex;
+    flex-direction: row;
+    padding: 3%;
+    justify-content: center;
+  }
+  .button-options{
+    margin-top: -5;
+    margin-right: 4%;
+  }
