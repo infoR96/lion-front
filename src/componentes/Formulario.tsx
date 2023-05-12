@@ -60,7 +60,7 @@ export const Formulario = () => {
 
     return (
         <div className='col my-4'>
-            <h1>DATOS GENERALES DE VOLADURA</h1>
+            
 
             <form onSubmit={handleSubmit} noValidate>
                 <label htmlFor="nroVoladura">nroVoladura</label>
