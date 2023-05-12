@@ -48,7 +48,7 @@ export const Table: React.FC<TableProps> = ({ data }) => {
 
   // const {voladuras, total}=datos;
   return (
-    <div className='col bg-white rounded mt-5'>
+    <div className=' bg-white rounded mt-5'>
       <table className="table ">
         <thead>
           <tr>
