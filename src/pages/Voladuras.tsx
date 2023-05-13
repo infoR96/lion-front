@@ -1,100 +1,36 @@
-import React from 'react'
+import React,{useEffect,useState} from 'react'
+import axios from 'axios';
 import { Formulario } from '../componentes/Formulario';
 import Table from '../componentes/Tabla';
 
 export const Voladuras = () => {
+  const [datos, setData]= useState({
+    total: 1, voladuras: [{
+      nroVoladura:0, 
+      fecha:"",
+      fase:"",
+      nivel:0,
+    malla:"",
+    }]
+  });
+  useEffect(() => {
+    axios.get('http://localhost:8081/api/voladuras')
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+
+
   return (
     <div className="container">
     <div  className=" row justify-content-center">
     <h1>DATOS GENERALES DE VOLADURA</h1>
       <Formulario />
-      <Table data={[{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },
-      {
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },
-      {
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      },{
-        nroVoladura: 45,
-        fecha: '10/05/2023',
-        fase: 'la segunda',
-        nivel: 4,
-        malla: 'triagular'
-      }]} />
+      <Table total={datos.total} voladuras={datos.voladuras}/>
     </div>
     </div>
   );
