@@ -1,8 +1,5 @@
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
-
-
-import { Formulario } from '../componentes/Formulario';
 import { DisenoPer,DisenoVol,Fragmentacion,MedTaladros,Sismografia,Vod,Voladuras,Densidad } from '../pages';
 
 
@@ -29,7 +26,7 @@ export const Navigation = () => {
                             <NavLink to="/vod" className={({ isActive }) => isActive ? 'nav-active' : ''}>VOD</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/disenovol" className={({ isActive }) => isActive ? 'nav-active' : ''}>Diseño de Voladura</NavLink>
+                            <NavLink to="/densidad" className={({ isActive }) => isActive ? 'nav-active' : ''}>Densidad</NavLink>
                         </li>
                         <li>
                             <NavLink to="/fragmentacion" className={({ isActive }) => isActive ? 'nav-active' : ''}>Fragmentacion</NavLink>

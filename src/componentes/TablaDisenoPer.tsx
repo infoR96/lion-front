@@ -7,10 +7,9 @@ import { Button } from 'react-bootstrap';
 
 type TableData = {
   nroVoladura: number;
-  fecha: string;
-  fase: string;
-  nivel: number;
-  malla: string;
+  burden: number;
+  espaciamiento: number;
+  dureza:string
 };
 
 type TableProps = {
@@ -19,10 +18,10 @@ type TableProps = {
 };
 
 
-export const Table: React.FC<TableProps> = ({total,voladuras}) => {
+export const TableDisenoPer: React.FC<TableProps> = ({total,voladuras}) => {
 
   const keys =Object.keys(voladuras[0]);
-  keys.pop();
+ 
   console.log('jaja',total);
   // const {voladuras, total}=datos;
   return (
@@ -40,13 +39,12 @@ export const Table: React.FC<TableProps> = ({total,voladuras}) => {
           </tr>
         </thead>
         <tbody>
-          {voladuras.map(({ nroVoladura, fecha, fase, nivel, malla }: TableData) => (
+          {voladuras.map(({ nroVoladura, burden,espaciamiento,dureza}: TableData) => (
             <tr key={nroVoladura} >
               <td className="data-cell ">{nroVoladura}</td>
-              <td className="data-cell ">{fecha}</td>
-              <td className="data-cell ">{fase}</td>
-              <td className="data-cell ">{nivel}</td>
-              <td className="data-cell ">{malla}</td>
+              <td className="data-cell ">{burden}</td>
+              <td className="data-cell ">{espaciamiento}</td>
+              <td className="data-cell ">{dureza}</td>
               <td className="data-cell ">
                 <div className='horizontal-container '>
                   <Button className='button-options'><HiPencil/></Button><Button className='btn btn-danger' ><MdDelete/></Button>
@@ -62,4 +60,4 @@ export const Table: React.FC<TableProps> = ({total,voladuras}) => {
   );
 };
 
-export default Table;
+export default TableDisenoPer;

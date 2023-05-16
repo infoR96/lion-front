@@ -1,19 +1,22 @@
 import React from 'react'
-import { Formulario } from '../componentes/Formulario';
-import Table from '../componentes/Tabla';
+import { 
+  FormularioDisenoPer,
+  FormularioVoladura,
+  TableDisenoPer,
+  TableVoladura } from '../componentes';
+
 
 export const DisenoPer = () => {
   return (
     <div className="container">
     <div  className=" row justify-content-center">
     <h1>DATOS GENERALES DE VOLADURA</h1>
-      <Formulario />
-      <Table  total={3}  voladuras={[{
+      <FormularioDisenoPer />
+      <TableDisenoPer  total={3}  voladuras={[{
       nroVoladura:0, 
-      fecha:"",
-      fase:"",
-      nivel:0,
-    malla:"",
+      burden:0,
+      espaciamiento:0,
+      dureza:"MEDIO"
     }]}/>
     </div>
     </div>

@@ -1,7 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios';
-import { Formulario } from '../componentes/Formulario';
-import Table from '../componentes/Tabla';
+import {TableVoladura,FormularioVoladura} from '../componentes';
 
 export const Voladuras = () => {
   const [datos, setData]= useState({
@@ -23,14 +22,12 @@ export const Voladuras = () => {
       });
   }, []);
 
-
-
   return (
     <div className="container">
     <div  className=" row justify-content-center">
     <h1>DATOS GENERALES DE VOLADURA</h1>
-      <Formulario />
-      <Table total={datos.total} voladuras={datos.voladuras}/>
+      <FormularioVoladura />
+      <TableVoladura total={datos.total} voladuras={datos.voladuras}/>
     </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import { Formulario } from "./componentes/Formulario";
-import { Table } from "./componentes/Tabla";
+
+import { TableVoladura } from "./componentes/TablaVoladura";
 import { Navigation } from "./router/Navigation";
 import './styles/styles.css'
 
