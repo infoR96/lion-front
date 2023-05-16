@@ -1,3 +1,4 @@
+export { FormularioDensidad } from "./FormularioDensidad";
 export { FormularioVod } from "./FormularioVod";
 export { FormularioSismografia } from "./FormularioSismografia";
 export{ FormularioDisenoVol } from "./FormularioDisenoVol";

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FormikErrors, useFormik } from 'formik';
+import { Formik, FormikErrors, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 
@@ -37,6 +37,7 @@ export const FormularioDisenoPer = () => {
 
     return (
         <div className='col my-4'>
+
             
 
             <form onSubmit={handleSubmit} noValidate>

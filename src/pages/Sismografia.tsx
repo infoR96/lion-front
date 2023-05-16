@@ -9,7 +9,7 @@ export const Sismografia = () => {
   return (
     <div className="container">
     <div  className=" row justify-content-center">
-    <h1>DATOS GENERALES DE VOLADURA</h1>
+    <h1>SISMOGRAFIA</h1>
       <FormularioSismografia />
       <TableSismografia  total={3}  voladuras={[{
       nroVoladura:0, 

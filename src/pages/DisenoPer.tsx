@@ -10,7 +10,7 @@ export const DisenoPer = () => {
   return (
     <div className="container">
     <div  className=" row justify-content-center">
-    <h1>DATOS GENERALES DE VOLADURA</h1>
+    <h1>DISEÑO DE MALLA DE PERFORACIÓN</h1>
       <FormularioDisenoPer />
       <TableDisenoPer  total={3}  voladuras={[{
       nroVoladura:0, 
