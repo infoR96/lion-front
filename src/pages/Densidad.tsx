@@ -6,7 +6,7 @@ export const Densidad = () => {
   return (
     <div className="container">
     <div  className=" row justify-content-center">
-    <h1>DISEÑO DE MALLA DE PERFORACIÓN</h1>
+    <h1>CONTROL DE DENSIDAD</h1>
       <FormularioDensidad />
       <TableDensidad  total={3}  voladuras={[{
       nroVoladura:45, 

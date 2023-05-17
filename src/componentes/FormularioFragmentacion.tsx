@@ -1,8 +1,7 @@
 import { Formik, Field, Form, useField, ErrorMessage } from 'formik';
-import { string } from 'yargs';
 import * as Yup from 'yup';
 
-export const FormularioMedTaladros = () => {
+export const FormularioFragmentacion = () => {
 
     return (
         <div className='col my-4'>

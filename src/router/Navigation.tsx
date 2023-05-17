@@ -29,10 +29,10 @@ export const Navigation = () => {
                             <NavLink to="/densidad" className={({ isActive }) => isActive ? 'nav-active' : ''}>Densidad</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/fragmentacion" className={({ isActive }) => isActive ? 'nav-active' : ''}>Fragmentacion</NavLink>
+                            <NavLink to="/medtaladros" className={({ isActive }) => isActive ? 'nav-active' : ''}>Medicion de Taladros</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/medtaladros" className={({ isActive }) => isActive ? 'nav-active' : ''}>Medicion de Taladros</NavLink>
+                            <NavLink to="/fragmentacion" className={({ isActive }) => isActive ? 'nav-active' : ''}>Fragmentacion</NavLink>
                         </li>
                     </ul>
                 </nav>

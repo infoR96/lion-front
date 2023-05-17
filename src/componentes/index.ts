@@ -1,3 +1,5 @@
+export { FormularioFragmentacion } from "./FormularioFragmentacion";
+export { FormularioMedTaladros } from "./FormularioMedTaladros";
 export { FormularioDensidad } from "./FormularioDensidad";
 export { FormularioVod } from "./FormularioVod";
 export { FormularioSismografia } from "./FormularioSismografia";
@@ -9,4 +11,5 @@ export {TableVoladura} from "./TablaVoladura";
 export { TableDiesenoVol } from "./TablaDisenoVol";
 export { TableSismografia } from "./TablaSismografia";
 export { TableVod } from "./TablaVod";
+export { TableMedTaladros } from "./TablaMedTaladros";
 
