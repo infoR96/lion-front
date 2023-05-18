@@ -1,49 +1,56 @@
 import { Densidad, DisenoPer, DisenoVol, GeneralData, MedTaladros, Sismografia, Vod, Voladura } from "../interfaces.tsx/interfaces";
 
 type AuthAction = 
-    | {type: 'getDensidad', payload: Densidad}
-    | {type: 'getDisenoPer', payload: { disenoPer:DisenoPer  }}
-    | {type: 'getDisenoVol', payload: DisenoVol}
-    | {type: 'getMedTaladros',payload:MedTaladros}
-    | {type: 'getSismografia',payload:Sismografia}
-    | {type: 'getVod',payload:Vod}
-    | {type: 'getDataGeneral',payload:GeneralData}
+    | {type: 'Densidad', payload: Densidad}
+    | {type: 'DisenoPer', payload:DisenoPer}
+    | {type: 'DisenoVol', payload: DisenoVol}
+    | {type: 'MedTaladros',payload:MedTaladros}
+    | {type: 'Sismografia',payload:Sismografia}
+    | {type: 'Vod',payload:Vod}
+    | {type: 'DataGeneral',payload:GeneralData}
 
 
     //state de tipo AuthState y lo que retorne la funcion tambien debera ser de tipo AuthState
-export const authReducer = (state:Voladura, action:AuthAction): Voladura =>{
+export const voladuraReducer = (state:Voladura, action:AuthAction): Voladura =>{
 
     switch (action.type) {
-        case 'getDensidad':
+
+        case 'DataGeneral':
+            return{
+                ...state,
+                generalData:action.payload
+            };
+        case 'Densidad':
             return{
                 ...state,
                 densidad:action.payload
-
             };
-        case 'removeError':
+        case 'DisenoPer':
             return{
                 ...state,
-                errorMessage:''
+                disenoPer:action.payload
             };
-        case 'signUp':
+        case 'DisenoVol':
             return{
                 ...state,
-                errorMessage:'',
-                status:'authenticated',
-                token:action.payload.token,
-                user: action.payload.user
-
-
+                disenoVol:action.payload
             };
-        case 'logout':     
-        case 'notAuthenticated':
+        case 'MedTaladros':
             return{
                 ...state,
-                status:'not-authenticated',
-                token:null,
-                user:null
-
+                medTaladros:action.payload
             };
+        case 'Sismografia':
+            return{
+                ...state,
+                sismografia:action.payload
+            };
+        case 'Vod':
+            return{
+                ...state,
+                vod:action.payload
+            };
+        
 
 
         default:

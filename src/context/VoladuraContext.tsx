@@ -1,27 +1,16 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react'
-import { Voladura } from '../interfaces.tsx/interfaces';
-import {
-  LoginData,
-  LoginResponse,
-  RegisterData,
-  UpdateContent,
-  User
-} from '../interfaces/interfaces';
+import { Densidad, GeneralData, Voladura } from '../interfaces.tsx/interfaces';
+import { voladuraReducer } from './VoladuraReducer';
 
-type AuthContexProps = {
-    errorMessage: string;
-    token: string | null;
-    user: User | null;
-    status: 'checking' | 'authenticated' | 'not-authenticated';
-    signUp: (registerData:RegisterData) => void;
-    signIn: (loginData: LoginData) => void;
-    logOut: () => void;
-    removeError: () => void;
+interface VoladuraProps extends Voladura{
+    getDensidad:(nro:number)=>void
+
 }
-const authInicialState: Voladura = {
+
+
+const voladuraInicialState: Voladura = {
     densidad: {
-        nroVoladura: 34,
-        registrado: true,
+        registrado: false,
         horaInicio: '8:45',
         horaFin: '9:00',
         tipoMezcla: 'ANFO',
@@ -31,6 +20,7 @@ const authInicialState: Voladura = {
 
  },
  generalData:{
+     registrado:false,
     nroVoladura: 0,
     fecha: '',
     fase: '',
@@ -38,7 +28,7 @@ const authInicialState: Voladura = {
     malla: ''
  },
  vod:{
-    nroVoladura: 0,
+    registrado:false,
     nroTaladro: 124,
     profundidadTaladro: 10,
     densidad: 1.33,
@@ -56,7 +46,7 @@ const authInicialState: Voladura = {
     diametro: 9
 },
  sismografia:{
-    nroVoladura: 0,
+    registrado:false,
     ptoMoni: 'P42',
     distancia: 299,
     cargaOperante:300,
@@ -66,8 +56,7 @@ const authInicialState: Voladura = {
     alpha:1.9 
 },
  medTaladros:{
-    nroVoladura: 34,
-    medido: true,
+    registrado:false,
     perforados: 229,
     tapados: 0,
     reperf: 0,
@@ -78,69 +67,50 @@ const authInicialState: Voladura = {
     Obeservaciones: 'Precorte'
  },
  disenoVol:{
-    nroVoladura: 0,
+    registrado:false,
     tipoExplosivo: 'ANFO',
     kgExplosivo: '273_300',
+ },
+ disenoPer:{
+    registrado:false,
+    burden: 4,
+    espaciamiento: 4,
+    dureza: 'DURO'
  }
- disenoPer:'' ,
-    user: null,
-    errorMessage: ''
  
 }
-export const AuthContext  = createContext({} as AuthContexProps);
+export const VoladuraContext  = createContext({} as VoladuraProps);
 
-export const AuthProvider = ({ children }: any) => {
+export const VoladuraProvider = ({ children }: any) => {
 
-    const [state, dispathc] = useReducer(authReducer, authInicialState)
+    const [state, dispathc] = useReducer(voladuraReducer, voladuraInicialState)
 
     useEffect(() => {
-        checkToken();
+
         console.log('a verrrr')
     }, []);
        
-    const checkToken = async()=>{
-        const token = await localStorage.getItem('token'); // la peticion AsyncStorage requiere de un await antes
-        
-        if(!token) {
-      
-            return dispathc({type:'notAuthenticated'})}
 
-        const {data,status} = await pushuApi.get('/auth') //desestructuracion de respuesta
-
-        if(status!== 200){return dispathc({type:'notAuthenticated'}
-
-        )}
-
-        dispathc({
-            type:'signUp',
-            payload:{
-                token:data.token,
-                user:data.usuario
-            }
-        })
-    }
-
-    const signUp = async ({nombre,correo,password,rol,telefono} : RegisterData) => {
+    const getDesnsidad = async ({ registrado,horaInicio,horaFin,tipoMezcla,densidadIninicial,densidadFinal,camion} : Densidad) => {
         try {
-            const resp = await pushuApi.post<LoginResponse>('/usuarios', { correo, password,nombre,rol,telefono });
+            
             dispathc({
-                type:'signUp',
+                type:'Densidad',
                 payload:{
-                    token:resp.data.token,
-                    user: resp.data.usuario
+                    registrado,horaInicio,horaFin,tipoMezcla,densidadIninicial,densidadFinal,camion
                 }
 
             });
-            await localStorage.setItem('token',resp.data.token)
+            // await localStorage.setItem('token',resp.data.token)
 
 
         } catch (error: any) {
             console.log('error en la peticion', error.response.data);
-            dispathc({type:'addError',payload:error.response.data.msg || 'Informacion Incorrecta'})
+            // dispathc({type:'addError',payload:error.response.data.msg || 'Informacion Incorrecta'})
         }
 
      }
-    const signIn = async ({ correo, password }: LoginData) => {
+    const getDataGeneral = async ({ correo, password }: GeneralData) => {
 
     
         try {
@@ -177,17 +147,14 @@ export const AuthProvider = ({ children }: any) => {
 
 
     return (
-        <AuthContext.Provider value={{
+        <VoladuraContext.Provider value={{
             ... state,
             
-            signUp,
-            signIn,
-            logOut,
-            removeError,
+            getDensidad,
 
         }} >
             {children}
-        </AuthContext.Provider>
+        </VoladuraContext.Provider>
     )
 
 
