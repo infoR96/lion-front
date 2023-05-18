@@ -2,21 +2,22 @@ import React, { createContext, useContext, useEffect, useReducer } from 'react'
 import { Densidad, GeneralData, Voladura } from '../interfaces.tsx/interfaces';
 import { voladuraReducer } from './VoladuraReducer';
 
-interface VoladuraProps extends Voladura{
+interface VoladuraProps {
+    state:Voladura,
     getDensidad:(nro:number)=>void
+    getDataGeneral:(nro:number)=>void
 
 }
 
-
-const voladuraInicialState: Voladura = {
+const voladuranicialState: Voladura = {
     densidad: {
         registrado: false,
-        horaInicio: '8:45',
-        horaFin: '9:00',
-        tipoMezcla: 'ANFO',
-        densidadIninicial: 0.771,
-        densidadFinal: 1.06,
-        camion: 'MACK'
+        horaInicio: '',
+        horaFin: '',
+        tipoMezcla: '',
+        densidadIninicial:0,
+        densidadFinal:0 ,
+        camion: ''
 
  },
  generalData:{
@@ -83,7 +84,7 @@ export const VoladuraContext  = createContext({} as VoladuraProps);
 
 export const VoladuraProvider = ({ children }: any) => {
 
-    const [state, dispathc] = useReducer(voladuraReducer, voladuraInicialState)
+    const [state, dispathc] = useReducer(voladuraReducer, voladuranicialState)
 
     useEffect(() => {
 
@@ -91,15 +92,21 @@ export const VoladuraProvider = ({ children }: any) => {
     }, []);
        
 
-    const getDesnsidad = async ({ registrado,horaInicio,horaFin,tipoMezcla,densidadIninicial,densidadFinal,camion} : Densidad) => {
+    const getDesnsidad = async (nro:Number) => {
         try {
+            const resp:Densidad ={
+                registrado: false,
+                horaInicio: '8:45',
+                horaFin: '9:00',
+                tipoMezcla: 'ANFO',
+                densidadIninicial: 0.771,
+                densidadFinal: 1.06,
+                camion: 'MACK'
+            }
             
             dispathc({
                 type:'Densidad',
-                payload:{
-                    registrado,horaInicio,horaFin,tipoMezcla,densidadIninicial,densidadFinal,camion
-                }
-
+                payload:resp
             });
             // await localStorage.setItem('token',resp.data.token)
 
@@ -110,50 +117,40 @@ export const VoladuraProvider = ({ children }: any) => {
         }
 
      }
-    const getDataGeneral = async ({ correo, password }: GeneralData) => {
-
+    const getDataGeneral = async (nro:Number) => {
     
         try {
            
-            const resp = await pushuApi.post<LoginResponse>('/auth/login', { correo, password });
+            const resp:GeneralData ={
+                registrado:true,
+                nroVoladura: 12,
+                fecha: '08/05/2023',
+                fase: '8DC',
+                nivel: 4,
+                malla: 'TRIANGULAR'
+            }
+            
+            
             dispathc({
-                type:'signUp',
-                payload:{
-                    token:resp.data.token,
-                    user: resp.data.usuario
-                }
+                type:'DataGeneral',
+                payload:resp
 
             });
-            await localStorage.setItem('token',resp.data.token)
-
 
         } catch (error: any) {
-            console.log('error en la peticion', error.response.data.msg);
-            dispathc({type:'addError',payload:error.response.data.msg || 'Informacion Incorrecta'})
+            console.log('error en la peticion');
+    
         }
-         
-    };
-    const logOut = async() => {
-        await localStorage.removeItem('token');
-        dispathc({type:'logout'})
-
-
-     };
-    const removeError = () => { 
-        dispathc({type:'removeError'})
-    };
-
-
-
-
+        
+    }
     return (
-        <VoladuraContext.Provider value={{
-            ... state,
-            
+        <VoladuraContext.Provider  value={{
+            state,
+            getDataGeneral,
             getDensidad,
-
+            }
         }} >
-            {children}
+            <h1>HOLA MUNDO</h1>
         </VoladuraContext.Provider>
     )
 
