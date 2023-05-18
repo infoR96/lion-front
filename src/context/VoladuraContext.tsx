@@ -4,7 +4,7 @@ import { voladuraReducer } from './VoladuraReducer';
 
 interface VoladuraProps {
     state:Voladura,
-    getDensidad:(nro:number)=>void
+    // getDensidad:(nro:number)=>void
     getDataGeneral:(nro:number)=>void
 
 }
@@ -80,17 +80,43 @@ const voladuranicialState: Voladura = {
  }
  
 }
+
+
+
 export const VoladuraContext  = createContext({} as VoladuraProps);
 
 export const VoladuraProvider = ({ children }: any) => {
 
     const [state, dispathc] = useReducer(voladuraReducer, voladuranicialState)
+   
+    const getDataGeneral = async (nro:Number) => {
 
-    useEffect(() => {
+        console.log('General data Funcional')
+    
+        try {
+           
+            const resp:GeneralData ={
+                registrado:true,
+                nroVoladura: 12,
+                fecha: '08/05/2023',
+                fase: '8DC',
+                nivel: 4,
+                malla: 'TRIANGULAR'
+            }
+            
+            
+            dispathc({
+                type:'DataGeneral',
+                payload:resp
 
-        console.log('a verrrr')
-    }, []);
-       
+            });
+
+        } catch (error: any) {
+            console.log('error en la peticion');
+    
+        }
+        
+    }
 
     const getDesnsidad = async (nro:Number) => {
         try {
@@ -117,40 +143,13 @@ export const VoladuraProvider = ({ children }: any) => {
         }
 
      }
-    const getDataGeneral = async (nro:Number) => {
-    
-        try {
-           
-            const resp:GeneralData ={
-                registrado:true,
-                nroVoladura: 12,
-                fecha: '08/05/2023',
-                fase: '8DC',
-                nivel: 4,
-                malla: 'TRIANGULAR'
-            }
-            
-            
-            dispathc({
-                type:'DataGeneral',
-                payload:resp
-
-            });
-
-        } catch (error: any) {
-            console.log('error en la peticion');
-    
-        }
-        
-    }
     return (
         <VoladuraContext.Provider  value={{
             state,
             getDataGeneral,
-            getDensidad,
             }
-        }} >
-            <h1>HOLA MUNDO</h1>
+        } >
+            {children}
         </VoladuraContext.Provider>
     )
 

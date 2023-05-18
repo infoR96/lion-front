@@ -1,7 +1,8 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState,useContext} from 'react'
 import axios from 'axios';
 import {TableVoladura,FormularioVoladura} from '../componentes';
 import { VoladuraSeleccionada } from '../componentes/VoladuraSeleccionada';
+import { VoladuraContext } from '../context/VoladuraContext';
 
 export const Voladuras = () => {
   const [datos, setData]= useState({
@@ -13,7 +14,12 @@ export const Voladuras = () => {
     malla:"",
     }]
   });
+
+  const {getDataGeneral,state}=useContext(VoladuraContext)
+  console.log('HOLA GIAN', state)
   useEffect(() => {
+    getDataGeneral(4);
+
     axios.get('http://localhost:8081/api/voladuras')
       .then(response => {
         setData(response.data);
