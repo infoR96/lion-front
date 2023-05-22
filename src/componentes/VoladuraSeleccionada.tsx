@@ -1,8 +1,33 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { VoladuraContext } from '../context/VoladuraContext'
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
-export const VoladuraSeleccionada = () => {
+
+type SelectProps = {
+    show:boolean;
+    id:string;
+    closeSelect:()=>void; 
+  }
+export const VoladuraSeleccionada = ({closeSelect,show,id}:SelectProps) => {
+
+    const {state} = useContext(VoladuraContext)
+    const {generalData,disenoPer,disenoVol,sismografia,vod,densidad,medTaladros}=state
     return (
-        <div className='bg-white rounded mt-5 col-6'>
+<>
+      <Modal
+        className=''
+        show={show}
+        onHide={closeSelect}
+        backdrop="static"
+        keyboard={false}
+        size='lg'
+      >
+        <Modal.Header closeButton className='bg-dark modal-select'> 
+          <Modal.Title >Editar datos</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className='bg-dark'>
+        <div className='bg-white rounded '>
             <h2 className='text-dark'> Voladura Seleccionada</h2>
             
             <table className="table " >
@@ -17,10 +42,11 @@ export const VoladuraSeleccionada = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
+                        <td className="data-cell ">{generalData.nroVoladura}</td>
+                        <td className="data-cell ">{generalData.fecha}</td>
+                        <td className="data-cell ">{generalData.fase}</td>
+                        <td className="data-cell ">{generalData.nivel}</td>
+                        <td className="data-cell ">{generalData.malla}</td>
 
                     </tr>
 
@@ -38,9 +64,9 @@ export const VoladuraSeleccionada = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
+                        <td className="data-cell ">{disenoPer.burden}</td>
+                        <td className="data-cell ">{disenoPer.espaciamiento}</td>
+                        <td className="data-cell ">{disenoPer.dureza}</td>
 
                     </tr>
 
@@ -58,9 +84,10 @@ export const VoladuraSeleccionada = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
+                        <td className="data-cell ">{disenoVol.tipoExplosivo}</td>
+                        <td className="data-cell ">{disenoVol.kgExplosivo}</td>
+                        <td className="data-cell ">{disenoPer.dureza}</td> 
+                        {/* VER LA POSIBILIDAD DE CAMBIO EN LA DUREZA DE VOLADURA */}
 
                     </tr>
 
@@ -82,9 +109,13 @@ export const VoladuraSeleccionada = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
+                        <td className="data-cell ">{sismografia.ptoMoni}</td>
+                        <td className="data-cell ">{sismografia.distancia}</td>
+                        <td className="data-cell ">{sismografia.cargaOperante}</td>
+                        <td className="data-cell ">{sismografia.vppDiseno}</td>
+                        <td className="data-cell ">{sismografia.vppReal}</td>
+                        <td className="data-cell ">{sismografia.k}</td>
+                        <td className="data-cell ">{sismografia.alpha}</td>
 
                     </tr>
 
@@ -106,13 +137,13 @@ export const VoladuraSeleccionada = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
+                        <td className="data-cell ">{vod.profundidadTaladro}</td>
+                        <td className="data-cell ">{vod.densidad}</td>
+                        <td className="data-cell ">{vod.sobrePerforacion}</td>
+                        <td className="data-cell ">{vod.agua}</td>
+                        <td className="data-cell ">{vod.taco}</td>
+                        <td className="data-cell ">{vod.tipoTaco}</td>
+                        <td className="data-cell ">{vod.longitudCarga}</td>
 
                     </tr>
 
@@ -132,13 +163,13 @@ export const VoladuraSeleccionada = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
+                        <td className="data-cell ">{vod.booster}</td>
+                        <td className="data-cell ">{vod.tipoDetonador}</td>
+                        <td className="data-cell ">{vod.tipoExplosivo}</td>
+                        <td className="data-cell ">{vod.vodPromedio}</td>
+                        <td className="data-cell ">{vod.probecable}</td>
+                        <td className="data-cell ">{vod.cableCoaxial}</td>
+                        <td className="data-cell ">{vod.diametro}</td>
 
                     </tr>
 
@@ -158,12 +189,12 @@ export const VoladuraSeleccionada = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
+                        <td className="data-cell ">{densidad.horaInicio}</td>
+                        <td className="data-cell ">{densidad.horaFin}</td>
+                        <td className="data-cell ">{densidad.tipoMezcla}</td>
+                        <td className="data-cell ">{densidad.densidadIninicial}</td>
+                        <td className="data-cell ">{densidad.densidadFinal}</td>
+                        <td className="data-cell ">{densidad.camion}</td>
                         
 
                     </tr>
@@ -182,10 +213,10 @@ export const VoladuraSeleccionada = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
+                        <td className="data-cell ">{medTaladros.perforados}</td>
+                        <td className="data-cell ">{medTaladros.tapados}</td>
+                        <td className="data-cell ">{medTaladros.perforados}</td>
+                        <td className="data-cell ">{medTaladros.adicional}</td>
                     </tr>
 
                 </tbody>
@@ -202,17 +233,25 @@ export const VoladuraSeleccionada = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                        <td className="data-cell "></td>
-                     
-                        
-
+                        <td className="data-cell ">{medTaladros.aguaMenor}</td>
+                        <td className="data-cell ">{medTaladros.aguaMayor}</td>
+                        <td className="data-cell ">{medTaladros.metrosPerforados}</td>
+                        <td className="data-cell ">{medTaladros.Obeservaciones}</td>
                     </tr>
 
                 </tbody>
             </table>
         </div>
+        </Modal.Body>
+        <Modal.Footer className='bg-dark'>
+          <Button variant="secondary" onClick={closeSelect}>
+            Close
+          </Button>
+          <Button variant="primary" >Understood</Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+
+        
     )
 }

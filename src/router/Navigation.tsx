@@ -8,7 +8,7 @@ export const Navigation = () => {
         <BrowserRouter>
             <div className="main-layout">
                 <nav>
-                    <img src='' alt="React Logo" />
+                    <img  className='logo' src='./logo.jpg' alt="React ogo" />
                     <ul>
                         <li>
                             <NavLink to="/voladuras" className={({ isActive }) => isActive ? 'nav-active' : ''}>Voladuras</NavLink>

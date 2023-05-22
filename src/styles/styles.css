@@ -1,6 +1,12 @@
 /* Estilos para contenedor de formulario y tabla */
 
-
+/* logo   */
+.logo{
+  width: 70%;
+  margin-top: 20%;
+  margin-bottom: 9%;
+  border-radius: 5%;
+}
 form {
     display: flex;
     flex-direction: column;
@@ -64,3 +70,10 @@ span, .error-message {
     margin-top: -5;
     margin-right: 4%;
   }
+
+
+/* Estilos para modal general */
+
+.modal-select{
+    width: 90%;
+}

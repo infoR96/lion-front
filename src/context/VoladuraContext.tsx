@@ -114,10 +114,8 @@ export const VoladuraProvider = ({ children }: any) => {
         } catch (error: any) {
             console.log('error en la peticion');
     
-        }
-        
+        }   
     }
-
     const getDesnsidad = async (nro:Number) => {
         try {
             const resp:Densidad ={
