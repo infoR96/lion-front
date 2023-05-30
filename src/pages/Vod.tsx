@@ -11,7 +11,6 @@ export const Vod = () => {
     <div className="container">
       <div className=" row justify-content-center">
         <h1>VELOCIDAD DE DETONACION</h1>
-        <FormularioVod />
         <TableVod total={3} voladuras={[{
           nroVoladura: 7140,
           nroTaladro: 124,

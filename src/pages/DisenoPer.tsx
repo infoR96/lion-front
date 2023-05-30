@@ -1,10 +1,4 @@
-import React from 'react'
-import { 
-  FormularioDisenoPer,
-  FormularioVoladura,
-  TableDisenoPer,
-  TableVoladura } from '../componentes';
-
+import { TableDisenoPer } from '../componentes';
 
 export const DisenoPer = () => {
   return (

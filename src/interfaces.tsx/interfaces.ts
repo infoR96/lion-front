@@ -18,9 +18,11 @@ export interface DisenoPer {
     vid:string;
 }
 export interface DisenoVol{
+    nroVoladura:number;
     registrado: boolean;
     tipoExplosivo:string;
     kgExplosivo:string;
+    vid:string;
 }
 export interface MedTaladros{
     registrado: boolean;
@@ -35,6 +37,7 @@ export interface MedTaladros{
 }
 export interface Sismografia{
     registrado: boolean;
+    nroVoladura:number;
     ptoMoni: string;
     distancia: number;
     cargaOperante: number;
@@ -42,6 +45,7 @@ export interface Sismografia{
     vppReal: number;
     k: number;
     alpha: number;
+    vid:string;
 
 }
 export interface Vod {

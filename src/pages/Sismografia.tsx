@@ -10,8 +10,8 @@ export const Sismografia = () => {
     <div className="container">
     <div  className=" row justify-content-center">
     <h1>SISMOGRAFIA</h1>
-      <FormularioSismografia />
       <TableSismografia  total={3}  voladuras={[{
+      registrado:false,
       nroVoladura:0, 
       ptoMoni:'P42',
       distancia:299,
@@ -19,7 +19,8 @@ export const Sismografia = () => {
       vppDiseno:6.67,
       vppReal:9.3,
       k:1500,
-      alpha:1.9
+      alpha:1.9,
+      vid:''
     }]}/>
     </div>
     </div>

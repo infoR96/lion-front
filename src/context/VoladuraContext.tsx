@@ -47,6 +47,7 @@ const voladuranicialState: Voladura = {
     diametro: 9
 },
  sismografia:{
+    nroVoladura:0,
     registrado:false,
     ptoMoni: 'P42',
     distancia: 299,
@@ -54,7 +55,8 @@ const voladuranicialState: Voladura = {
     vppDiseno:6.67,
     vppReal:9.3,
     k:1500,
-    alpha:1.9 
+    alpha:1.9,
+    vid:''
 },
  medTaladros:{
     registrado:false,
@@ -71,6 +73,8 @@ const voladuranicialState: Voladura = {
     registrado:false,
     tipoExplosivo: 'ANFO',
     kgExplosivo: '273_300',
+    nroVoladura:0,
+    vid:''
  },
  disenoPer:{
     nroVoladura:0,
