@@ -1,10 +1,7 @@
 import React,{useEffect,useState,useContext} from 'react'
 import axios from 'axios';
-import {TableVoladura,FormularioVoladura, ModalEdicion} from '../componentes';
-import { VoladuraSeleccionada } from '../componentes/VoladuraSeleccionada';
+import {TableVoladura} from '../componentes';
 import { VoladuraContext } from '../context/VoladuraContext';
-
-
 
 export const Voladuras = () => {
   const [datos, setData]= useState({

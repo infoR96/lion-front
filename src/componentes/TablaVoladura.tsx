@@ -5,7 +5,7 @@ import { HiPencil } from 'react-icons/hi';
 import { MdDelete } from 'react-icons/md';
 import { FiEye } from 'react-icons/fi';
 import { Button } from 'react-bootstrap';
-import { ModalEdicion } from '.';
+import { ModalEdicionGeneral } from './ModalEditVoladura';
 import { VoladuraSeleccionada } from './VoladuraSeleccionada';
 
 export type TableData = {
@@ -21,7 +21,6 @@ type TableProps = {
   total: number;
   voladuras: TableData[];
 };
-
 
 const voladuraUpdate = (vid: string) => {
   console.log(vid)
@@ -67,7 +66,7 @@ export const TableVoladura: React.FC<TableProps> = ({ total, voladuras }) => {
 
   return (
     <div className=' bg-white rounded mt-5'>
-      <ModalEdicion data={vid} show={show} handleClose={handleClose} />
+      <ModalEdicionGeneral data={vid} show={show} handleClose={handleClose} />
       <VoladuraSeleccionada id={id} show={showSelect} closeSelect={closeSelect} />
       <table className="table ">
         <thead>

@@ -10,10 +10,12 @@ export interface Densidad {
 }
 
 export interface DisenoPer {
+    nroVoladura:number;
     registrado: boolean;
     burden: number;
     espaciamiento: number;
-    dureza: string
+    dureza: string;
+    vid:string;
 }
 export interface DisenoVol{
     registrado: boolean;

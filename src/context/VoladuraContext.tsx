@@ -73,10 +73,12 @@ const voladuranicialState: Voladura = {
     kgExplosivo: '273_300',
  },
  disenoPer:{
+    nroVoladura:0,
     registrado:false,
     burden: 4,
     espaciamiento: 4,
-    dureza: 'DURO'
+    dureza: 'DURO',
+    vid:''
  }
  
 }

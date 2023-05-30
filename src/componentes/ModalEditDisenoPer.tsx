@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { FormularioVoladura } from './FormularioVoladura';
-import { TableData } from './TablaVoladura';
+import { DisenoPer } from '../interfaces.tsx/interfaces';
+import { FormularioDisenoPer } from './FormularioDisenoPer';
 
 type ModalProps = {
   show:boolean;
-  data: TableData;
+  data: DisenoPer;
   handleClose:()=>void; 
 }
 
-export const ModalEdicionGeneral =({handleClose,data,show}:ModalProps) => {
+export const ModalEdicionDisenoPer =({handleClose,data,show}:ModalProps) => {
   return (
     <>
       <Modal
@@ -23,7 +23,7 @@ export const ModalEdicionGeneral =({handleClose,data,show}:ModalProps) => {
           <Modal.Title >Editar datos</Modal.Title>
         </Modal.Header>
         <Modal.Body className='bg-dark'>
-            <FormularioVoladura/>
+           <FormularioDisenoPer/>
         </Modal.Body>
         <Modal.Footer className='bg-dark'>
           <Button variant="secondary" onClick={handleClose}>

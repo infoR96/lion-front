@@ -1,31 +1,61 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { FiEye } from 'react-icons/fi';
 import { HiPencil } from 'react-icons/hi';
 import { MdDelete} from 'react-icons/md';
 import { Button } from 'react-bootstrap';
+import { ModalEdicionDisenoPer } from './ModalEditDisenoPer';
+import { VoladuraSeleccionada } from './VoladuraSeleccionada';
+import { DisenoPer } from '../interfaces.tsx/interfaces';
 
-type TableData = {
-  nroVoladura: number;
-  burden: number;
-  espaciamiento: number;
-  dureza:string
-};
 
 type TableProps = {
   total: number;
-  voladuras:TableData[];
+  voladuras:DisenoPer[];
 };
 
 
 export const TableDisenoPer: React.FC<TableProps> = ({total,voladuras}) => {
 
+  const [show, setShow] = useState(false);
+  const [vid, setVid] = useState({
+    nroVoladura: 0,
+    registrado:false,
+    burden: 0,
+    espaciamiento: 0,
+    dureza:'ALTA',
+    vid:''
+  });
+  const [id, setId] = useState('')
+
+  const [showSelect, setShowSelect] = useState(false)
+
+  const closeSelect = () => setShowSelect(false)
+  const openSelect = () => setShowSelect(true)
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
+  
+  const editData = (voladuraSelect: DisenoPer) => {
+    handleShow();
+
+  }
+  const selectData = (vid:string)=>{
+    openSelect();
+    console.log('SELECCIONADO',vid)
+
+  }
+
+
   const keys =Object.keys(voladuras[0]);
- 
-  console.log('jaja',total);
+  keys.shift();
+  keys.pop();
+
   // const {voladuras, total}=datos;
   return (
     <div className=' bg-white rounded mt-5'>
+       <ModalEdicionDisenoPer data={vid} show={show} handleClose={handleClose} />
+       <VoladuraSeleccionada id={id} show={showSelect} closeSelect={closeSelect} />
       <table className="table ">
         <thead>
           <tr>
@@ -39,7 +69,7 @@ export const TableDisenoPer: React.FC<TableProps> = ({total,voladuras}) => {
           </tr>
         </thead>
         <tbody>
-          {voladuras.map(({ nroVoladura, burden,espaciamiento,dureza}: TableData) => (
+          {voladuras.map(({ nroVoladura, burden,espaciamiento,dureza,registrado,vid}: DisenoPer) => (
             <tr key={nroVoladura} >
               <td className="data-cell ">{nroVoladura}</td>
               <td className="data-cell ">{burden}</td>
@@ -47,7 +77,16 @@ export const TableDisenoPer: React.FC<TableProps> = ({total,voladuras}) => {
               <td className="data-cell ">{dureza}</td>
               <td className="data-cell ">
                 <div className='horizontal-container '>
-                  <Button className='button-options'><HiPencil/></Button><Button className='btn btn-danger' ><MdDelete/></Button>
+                  <Button className='button-options'
+                    onClick={()=>editData({
+                      nroVoladura,burden,espaciamiento,dureza,registrado,vid
+                    })}>
+                  <HiPencil/></Button>
+                  
+                  <Button className='btn btn-danger' ><MdDelete/></Button>
+                  <Button className=' btn btn-warning button-options mx-3' 
+                    onClick={() => selectData(vid)} 
+                  ><FiEye /></Button>
                 </div>
               </td>
             </tr>

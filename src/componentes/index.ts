@@ -14,4 +14,4 @@ export { TableDiesenoVol } from "./TablaDisenoVol";
 export { TableSismografia } from "./TablaSismografia";
 export { TableVod } from "./TablaVod";
 export { TableMedTaladros } from "./TablaMedTaladros";
-export { ModalEdicion}  from "./ModalEditVoladura";
+export { ModalEdicionGeneral}  from "./ModalEditVoladura";
