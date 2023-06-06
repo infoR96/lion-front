@@ -19,7 +19,7 @@ export const TableDisenoPer: React.FC<TableProps> = ({total,voladuras}) => {
 
   const [show, setShow] = useState(false);
   const [vid, setVid] = useState({
-    nroVoladura: 0,
+    nrovoladura: 0,
     registrado:false,
     burden: 0,
     espaciamiento: 0,
@@ -42,13 +42,12 @@ export const TableDisenoPer: React.FC<TableProps> = ({total,voladuras}) => {
   }
   const selectData = (vid:string)=>{
     openSelect();
-    console.log('SELECCIONADO',vid)
+    axios.get(`http://localhost:8081/api/disenoPerforacion?id=${vid}`)
 
   }
 
 
   const keys =Object.keys(voladuras[0]);
-  keys.shift();
   keys.pop();
 
   // const {voladuras, total}=datos;
@@ -69,9 +68,9 @@ export const TableDisenoPer: React.FC<TableProps> = ({total,voladuras}) => {
           </tr>
         </thead>
         <tbody>
-          {voladuras.map(({ nroVoladura, burden,espaciamiento,dureza,registrado,vid}: DisenoPer) => (
-            <tr key={nroVoladura} >
-              <td className="data-cell ">{nroVoladura}</td>
+          {voladuras.map(({ nrovoladura, burden,espaciamiento,dureza,vid}: DisenoPer) => (
+            <tr key={nrovoladura} >
+              <td className="data-cell ">{nrovoladura}</td>
               <td className="data-cell ">{burden}</td>
               <td className="data-cell ">{espaciamiento}</td>
               <td className="data-cell ">{dureza}</td>
@@ -79,7 +78,7 @@ export const TableDisenoPer: React.FC<TableProps> = ({total,voladuras}) => {
                 <div className='horizontal-container '>
                   <Button className='button-options'
                     onClick={()=>editData({
-                      nroVoladura,burden,espaciamiento,dureza,registrado,vid
+                      nrovoladura,burden,espaciamiento,dureza,vid
                     })}>
                   <HiPencil/></Button>
                   

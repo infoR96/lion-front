@@ -1,4 +1,4 @@
-export { DisenoPer } from "./DisenoPer";
+export { DisenoPerforacion } from "./DisenoPer";
 export { DisenoVol } from "./DisenoVol";
 export { Fragmentacion } from "./Fragmentacion";
 export { MedTaladros } from "./MedTaladros";

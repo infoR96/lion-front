@@ -77,8 +77,7 @@ const voladuranicialState: Voladura = {
     vid:''
  },
  disenoPer:{
-    nroVoladura:0,
-    registrado:false,
+    nrovoladura:0,
     burden: 4,
     espaciamiento: 4,
     dureza: 'DURO',
@@ -86,8 +85,6 @@ const voladuranicialState: Voladura = {
  }
  
 }
-
-
 
 export const VoladuraContext  = createContext({} as VoladuraProps);
 

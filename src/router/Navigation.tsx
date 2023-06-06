@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
-import { DisenoPer,DisenoVol,Fragmentacion,MedTaladros,Sismografia,Vod,Voladuras,Densidad } from '../pages';
+import { DisenoPerforacion,DisenoVol,Fragmentacion,MedTaladros,Sismografia,Vod,Voladuras,Densidad } from '../pages';
 
 
 export const Navigation = () => {
@@ -40,7 +40,7 @@ export const Navigation = () => {
 
                 <Routes>
                     <Route path="voladuras" element={<Voladuras />} />
-                    <Route path="disenoper" element={<DisenoPer/>} />
+                    <Route path="disenoper" element={<DisenoPerforacion/>} />
                     <Route path="disenovol" element={<DisenoVol/>} />
                     <Route path="sismografia" element={<Sismografia/>} />
                     <Route path="vod" element={<Vod/>} />

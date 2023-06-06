@@ -10,8 +10,7 @@ export interface Densidad {
 }
 
 export interface DisenoPer {
-    nroVoladura:number;
-    registrado: boolean;
+    nrovoladura:number;
     burden: number;
     espaciamiento: number;
     dureza: string;
