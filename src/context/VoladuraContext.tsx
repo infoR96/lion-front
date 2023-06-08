@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { createContext, useContext, useEffect, useReducer } from 'react'
 import { Densidad, GeneralData, Voladura } from '../interfaces.tsx/interfaces';
 import { voladuraReducer } from './VoladuraReducer';
@@ -5,7 +6,7 @@ import { voladuraReducer } from './VoladuraReducer';
 interface VoladuraProps {
     state:Voladura,
     // getDensidad:(nro:number)=>void
-    getDataGeneral:(nro:number)=>void
+    getDataGeneral:(dataGeneral:GeneralData)=>void
 
 }
 
@@ -21,12 +22,12 @@ const voladuranicialState: Voladura = {
 
  },
  generalData:{
-     registrado:false,
-    nroVoladura: 0,
+    nrovoladura: 0,
     fecha: '',
     fase: '',
     nivel: 0,
-    malla: ''
+    malla: '',
+    vid:''
  },
  vod:{
     registrado:false,
@@ -92,25 +93,14 @@ export const VoladuraProvider = ({ children }: any) => {
 
     const [state, dispathc] = useReducer(voladuraReducer, voladuranicialState)
    
-    const getDataGeneral = async (nro:Number) => {
+    const getDataGeneral = (dataGeneral:GeneralData) => {
 
-        console.log('General data Funcional')
-    
+        console.log('generalata:',dataGeneral)
         try {
-           
-            const resp:GeneralData ={
-                registrado:true,
-                nroVoladura: 12,
-                fecha: '08/05/2023',
-                fase: '8DC',
-                nivel: 4,
-                malla: 'TRIANGULAR'
-            }
-            
             
             dispathc({
                 type:'DataGeneral',
-                payload:resp
+                payload:dataGeneral
 
             });
 

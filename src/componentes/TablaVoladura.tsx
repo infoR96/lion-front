@@ -58,8 +58,8 @@ export const TableVoladura: React.FC<TableProps> = ({ total, voladuras }) => {
   }
 
   const selectData = (vid:string)=>{
+    setId(vid);
     openSelect();
-    console.log('SELECCIONADO',vid)
 
   }
 
@@ -82,13 +82,13 @@ export const TableVoladura: React.FC<TableProps> = ({ total, voladuras }) => {
         </thead>
         <tbody>
           {voladuras.map(({ nroVoladura, fecha, fase, nivel, malla, vid }) => (
-            <tr key={nroVoladura} >
-              <td className="data-cell ">{nroVoladura}</td>
-              <td className="data-cell ">{fecha}</td>
-              <td className="data-cell ">{fase}</td>
-              <td className="data-cell ">{nivel}</td>
-              <td className="data-cell ">{malla}</td>
-              <td className="data-cell ">
+            <tr key={vid} >
+              <td className="data-cell " >{nroVoladura}</td>
+              <td className="data-cell " >{fecha}</td>
+              <td className="data-cell " >{fase}</td>
+              <td className="data-cell " >{nivel}</td>
+              <td className="data-cell " >{malla}</td>
+              <td className="data-cell " >
                 <div className='horizontal-container  '>
                   <Button className='button-options' key={vid}
                     onClick={() => editData({

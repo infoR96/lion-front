@@ -66,12 +66,12 @@ export interface Vod {
     diametro:number;
 }
 export interface GeneralData{
-    nroVoladura: number;
-    registrado: boolean;
+    nrovoladura: number;
     fecha: string;
     fase: string;
     nivel: number;
     malla: string;
+    vid:string;
 }
 
 export interface Voladura{

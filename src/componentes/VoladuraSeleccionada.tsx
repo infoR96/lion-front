@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { VoladuraContext } from '../context/VoladuraContext'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import axios from 'axios';
 
 
 type SelectProps = {
@@ -9,10 +10,21 @@ type SelectProps = {
     id:string;
     closeSelect:()=>void; 
   }
-export const VoladuraSeleccionada = ({closeSelect,show,id}:SelectProps) => {
+export const VoladuraSeleccionada = ({closeSelect,show,id='64797186af2d1352cd822db5'}:SelectProps) => {
+    const {state, getDataGeneral} = useContext(VoladuraContext)
+    useEffect(() => {
+        console.log('enserio',id)
+    axios.get(`http://localhost:8081/api/disenoPerforacion/${id}`)
+    .then(response => {
+        console.log('respuesta rapida',response.data)
 
-    const {state} = useContext(VoladuraContext)
+    })
+    .catch(error => {
+      console.log(error);
+    });
+    }, [])
     const {generalData,disenoPer,disenoVol,sismografia,vod,densidad,medTaladros}=state
+    
     return (
 <>
       <Modal
@@ -42,7 +54,7 @@ export const VoladuraSeleccionada = ({closeSelect,show,id}:SelectProps) => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell ">{generalData.nroVoladura}</td>
+                        <td className="data-cell ">{generalData.nrovoladura}</td>
                         <td className="data-cell ">{generalData.fecha}</td>
                         <td className="data-cell ">{generalData.fase}</td>
                         <td className="data-cell ">{generalData.nivel}</td>

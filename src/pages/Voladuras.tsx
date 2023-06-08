@@ -17,7 +17,12 @@ export const Voladuras = () => {
 
   const {getDataGeneral,state}=useContext(VoladuraContext)
   useEffect(() => {
-    getDataGeneral(4);
+    getDataGeneral({nrovoladura:0, 
+      fecha:"",
+      fase:"",
+      nivel:0,
+    malla:"",
+    vid:""});
 
     axios.get('http://localhost:8081/api/voladuras')
       .then(response => {

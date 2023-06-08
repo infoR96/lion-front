@@ -1,6 +1,6 @@
 import { Densidad, DisenoPer, DisenoVol, GeneralData, MedTaladros, Sismografia, Vod, Voladura } from "../interfaces.tsx/interfaces";
 
-type AuthAction = 
+type SelectAction = 
     | {type: 'Densidad', payload: Densidad}
     | {type: 'DisenoPer', payload:DisenoPer}
     | {type: 'DisenoVol', payload: DisenoVol}
@@ -11,7 +11,7 @@ type AuthAction =
 
 
     //state de tipo AuthState y lo que retorne la funcion tambien debera ser de tipo AuthState
-export const voladuraReducer = (state:Voladura, action:AuthAction): Voladura =>{
+export const voladuraReducer = (state:Voladura, action:SelectAction): Voladura =>{
 
     switch (action.type) {
 
