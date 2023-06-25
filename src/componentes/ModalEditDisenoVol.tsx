@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { DisenoPer, DisenoVol } from '../interfaces.tsx/interfaces';
-import { FormularioDisenoPer } from './FormularioDisenoPer';
 import { FormularioDisenoVol } from './FormularioDisenoVol';
 
 type ModalProps = {

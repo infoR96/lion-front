@@ -9,8 +9,8 @@ import { ModalEdicionGeneral } from './ModalEditVoladura';
 import { VoladuraSeleccionada } from './VoladuraSeleccionada';
 
 export type TableData = {
-  nroVoladura: number;
-  fecha: string;
+  nrovoladura: number;
+  fecha: Date;
   fase: string;
   nivel: number;
   malla: string;
@@ -27,12 +27,30 @@ const voladuraUpdate = (vid: string) => {
 }
 
 
-export const TableVoladura: React.FC<TableProps> = ({ total, voladuras }) => {
+export const TableVoladura: React.FC = React.memo (() => {
+
+  const [datos, setData]= useState({
+    total: 0, voladuras: []
+  });
+
+  const {total,voladuras}=datos;
+  useEffect(() => {
+    axios.get('http://localhost:8081/api/voladuras')
+    .then(response => {
+      setData(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+  
+
+  }, [total])
+  
 
   const [show, setShow] = useState(false);
-  const [vid, setVid] = useState({
-    nroVoladura: 0,
-    fecha: '',
+  const [initstate, setInitstate] = useState({
+    nrovoladura: 0,
+    fecha: new Date(),
     fase: '',
     nivel: 0,
     malla: '',
@@ -40,17 +58,18 @@ export const TableVoladura: React.FC<TableProps> = ({ total, voladuras }) => {
   });
   const [id, setId] = useState('')
 
-
   const [showSelect, setShowSelect] = useState(false)
   const closeSelect = () => setShowSelect(false)
   const openSelect = () => setShowSelect(true)
   // para formulario
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const getVid = (data: TableData) => setVid(data);
+  const getVid = (data: TableData) => setInitstate(data);
 
-  const keys = Object.keys(voladuras[0]);
+  const keys = voladuras.length > 0 ? Object.keys(voladuras[0]) : [];
   keys.pop();
+
+  console.log('NRO DE VOLADURA',voladuras)
 
   const editData = (voladuraSelect: TableData) => {
     handleShow();
@@ -63,10 +82,10 @@ export const TableVoladura: React.FC<TableProps> = ({ total, voladuras }) => {
 
   }
 
-
+  
   return (
     <div className=' bg-white rounded mt-5'>
-      <ModalEdicionGeneral data={vid} show={show} handleClose={handleClose} />
+      <ModalEdicionGeneral data={initstate} show={show} handleClose={handleClose} />
       <VoladuraSeleccionada id={id} show={showSelect} closeSelect={closeSelect} />
       <table className="table ">
         <thead>
@@ -81,10 +100,10 @@ export const TableVoladura: React.FC<TableProps> = ({ total, voladuras }) => {
           </tr>
         </thead>
         <tbody>
-          {voladuras.map(({ nroVoladura, fecha, fase, nivel, malla, vid }) => (
+          {voladuras.map(({ nrovoladura, fecha, fase, nivel, malla, vid }) => (
             <tr key={vid} >
-              <td className="data-cell " >{nroVoladura}</td>
-              <td className="data-cell " >{fecha}</td>
+              <td className="data-cell " >{nrovoladura}</td>
+              <td className="data-cell " >{`${fecha}`}</td>
               <td className="data-cell " >{fase}</td>
               <td className="data-cell " >{nivel}</td>
               <td className="data-cell " >{malla}</td>
@@ -92,7 +111,7 @@ export const TableVoladura: React.FC<TableProps> = ({ total, voladuras }) => {
                 <div className='horizontal-container  '>
                   <Button className='button-options' key={vid}
                     onClick={() => editData({
-                      nroVoladura, fecha, fase,
+                      nrovoladura, fecha, fase,
                       nivel, malla, vid
                     })}><HiPencil /></Button>
                   <Button className='btn btn-danger' ><MdDelete /></Button>
@@ -109,6 +128,6 @@ export const TableVoladura: React.FC<TableProps> = ({ total, voladuras }) => {
 
     </div>
   );
-};
+});
 
 export default TableVoladura;

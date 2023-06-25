@@ -67,7 +67,7 @@ export interface Vod {
 }
 export interface GeneralData{
     nrovoladura: number;
-    fecha: string;
+    fecha: Date;
     fase: string;
     nivel: number;
     malla: string;

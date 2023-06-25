@@ -55,7 +55,7 @@ export const VoladuraSeleccionada = ({closeSelect,show,id='64797186af2d1352cd822
                 <tbody>
                     <tr>
                         <td className="data-cell ">{generalData.nrovoladura}</td>
-                        <td className="data-cell ">{generalData.fecha}</td>
+                        <td className="data-cell ">{`${generalData.fecha}`}</td>
                         <td className="data-cell ">{generalData.fase}</td>
                         <td className="data-cell ">{generalData.nivel}</td>
                         <td className="data-cell ">{generalData.malla}</td>

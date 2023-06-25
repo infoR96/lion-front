@@ -23,7 +23,7 @@ const voladuranicialState: Voladura = {
  },
  generalData:{
     nrovoladura: 0,
-    fecha: '',
+    fecha: new Date(),
     fase: '',
     nivel: 0,
     malla: '',
@@ -95,7 +95,6 @@ export const VoladuraProvider = ({ children }: any) => {
    
     const getDataGeneral = (dataGeneral:GeneralData) => {
 
-        console.log('generalata:',dataGeneral)
         try {
             
             dispathc({

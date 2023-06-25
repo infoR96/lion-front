@@ -1,22 +1,23 @@
 import axios from 'axios';
+import { format } from 'date-fns';
 import { FormikErrors, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 
 interface FormValues {
-    nroVoladura: number;
-    fecha: string;
+    nrovoladura: number;
+    fecha: Date
     fase: string;
     nivel: number;
     malla: string;
 }
 
-export const FormularioVoladura = () => {
+export const FormularioVoladura = (data:FormValues) => {
 
     const {  values, errors, handleSubmit, touched, getFieldProps } = useFormik({
-        initialValues: {
-            nroVoladura: 0,
-            fecha: '',
+        initialValues: data  || {
+            nrovoladura: 0,
+            fecha:new Date(),
             fase: '',
             nivel: 0,
             malla: ''
@@ -46,23 +47,25 @@ export const FormularioVoladura = () => {
         })
     });
 
+    const fecha1= new Date(values.fecha).toISOString().split('T')[0]
+    
+
     return (
         <div className='col my-4'>
-            
-
             <form onSubmit={handleSubmit} noValidate>
                 <label htmlFor="nroVoladura">nroVoladura</label>
                 <input
                     type="number"
-                    {... getFieldProps('nroVoladura')}/>
+                    {... getFieldProps('nrovoladura')}/>
 
-                {touched.nroVoladura && errors.nroVoladura && <span>{errors.nroVoladura}</span>}
+                {touched.nrovoladura && errors.nrovoladura && <span>{errors.nrovoladura}</span>}
                 <label htmlFor="fecha">Fecha</label>
                 <input
-                    type="date"
-                    {... getFieldProps('fecha')}/>
+                    type="Date"
+                    {... getFieldProps('fecha')}
+                    value={fecha1}/>
                 
-                {touched.fecha && errors.fecha && <span>{errors.fecha}</span>}
+                {touched.fecha && errors.fecha && <span>{`${errors.fecha}`}</span>}
                 <label htmlFor="fase">fase</label>
                 <input
                     type="text"
@@ -78,8 +81,6 @@ export const FormularioVoladura = () => {
                     type="text"
                     {... getFieldProps('malla')}/>
                 {touched.malla && errors.malla && <span>{errors.malla}</span>}
-
-
                 <button type="submit">Submit</button>
 
             </form>
