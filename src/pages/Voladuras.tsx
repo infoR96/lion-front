@@ -22,7 +22,7 @@ export const Voladuras = () => {
     <div  className=" row justify-content-center">
     <h1>DATOS GENERALES DE VOLADURA</h1>
       <h2>Nueva Voladura</h2>
-      <FormularioVoladura nrovoladura={0} fecha={new Date()} fase={''} nivel={0} malla={''}/>
+      <FormularioVoladura nrovoladura={0} fecha={new Date()} fase={''} nivel={0} malla={''} id={''}/>
       <TableVoladura />
       
     </div>

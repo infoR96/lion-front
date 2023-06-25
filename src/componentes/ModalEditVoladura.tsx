@@ -8,10 +8,9 @@ type ModalProps = {
   show:boolean;
   data: TableData;
   handleClose:()=>void; 
+
 }
 export const ModalEdicionGeneral =({handleClose,data,show}:ModalProps) => {
-
-  console.log('LA FECHA', data.fecha)
   return (
     <>
       <Modal
@@ -25,7 +24,7 @@ export const ModalEdicionGeneral =({handleClose,data,show}:ModalProps) => {
         </Modal.Header>
         <Modal.Body className='bg-dark'>
             <FormularioVoladura nrovoladura={data.nrovoladura} fecha={data.fecha} fase={data.fase} 
-            nivel={data.nivel} malla={data.malla} />
+            nivel={data.nivel} malla={data.malla} id={data.vid} />
         </Modal.Body>
         <Modal.Footer className='bg-dark'>
           <Button variant="secondary" onClick={handleClose}>

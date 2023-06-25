@@ -10,10 +10,11 @@ interface FormValues {
     fase: string;
     nivel: number;
     malla: string;
+    id:string
 }
 
 export const FormularioVoladura = (data:FormValues) => {
-
+    console.log('DATA', data)
     const {  values, errors, handleSubmit, touched, getFieldProps } = useFormik({
         initialValues: data  || {
             nrovoladura: 0,
@@ -23,6 +24,7 @@ export const FormularioVoladura = (data:FormValues) => {
             malla: ''
         },
         onSubmit: (values) => {
+           if(!values.id){
             axios.post('http://localhost:8081/api/voladuras', values)
                 .then(response => {
                     console.log('Se envió la información correctamente', response.data);
@@ -30,10 +32,14 @@ export const FormularioVoladura = (data:FormValues) => {
                 .catch(error => {
                     console.log('Error al enviar la información', error);
                 });
+            }else{
+                console.log('mira',values.id)
+            }
+
         },
         validationSchema: Yup.object({
-            nroVoladura: Yup.number()
-                            .required(),
+            nrovoladura: Yup.number()
+                            .required('Requerido'),
 
             fecha: Yup.string().
                         required('Requerido'),
@@ -66,22 +72,28 @@ export const FormularioVoladura = (data:FormValues) => {
                     value={fecha1}/>
                 
                 {touched.fecha && errors.fecha && <span>{`${errors.fecha}`}</span>}
+                
                 <label htmlFor="fase">fase</label>
                 <input
                     type="text"
                     {... getFieldProps('fase')}/>
-
+                 {touched.fase && errors.fase && <span>{errors.fase}</span>}
                 <label htmlFor="nivel">Nivel</label>
                 <input
                     type="number"
                     {... getFieldProps('nivel')}/>
-                    {touched.fase && errors.fase && <span>{errors.fase}</span>}
+                    {touched.nivel && errors.nivel && <span>{errors.nivel}</span>}
                 <label htmlFor="malla">Malla</label>
                 <input
                     type="text"
                     {... getFieldProps('malla')}/>
                 {touched.malla && errors.malla && <span>{errors.malla}</span>}
-                <button type="submit">Submit</button>
+
+                {
+                    data.id?
+                    <button style={{width:90}} className='btn btn-primary' type="submit">Actualizar</button>:
+                    <button style={{width:90}} className='btn btn-primary' type="submit">Guardar</button>
+                }
 
             </form>
 

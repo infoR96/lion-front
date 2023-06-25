@@ -69,11 +69,16 @@ export const TableVoladura: React.FC = React.memo (() => {
   const keys = voladuras.length > 0 ? Object.keys(voladuras[0]) : [];
   keys.pop();
 
-  console.log('NRO DE VOLADURA',voladuras)
-
+  useEffect(() => {
+    
+    console.log('NRO DE VOLADURA',voladuras)
+  }, [])
+  
+//ESTA FUNCION SIRVE PARA EDITAR LOS DATOS Y ENVIAR UN ID EXISTENTE
   const editData = (voladuraSelect: TableData) => {
     handleShow();
     getVid(voladuraSelect)
+    console.log('DATA RECIBIDA',voladuraSelect)
   }
 
   const selectData = (vid:string)=>{
