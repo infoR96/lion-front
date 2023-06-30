@@ -1,5 +1,4 @@
-import React,{useEffect,useState,useContext} from 'react'
-import axios from 'axios';
+import {useEffect,useContext} from 'react'
 import {FormularioVoladura, TableVoladura} from '../componentes';
 import { VoladuraContext } from '../context/VoladuraContext';
 
@@ -22,7 +21,7 @@ export const Voladuras = () => {
     <div  className=" row justify-content-center">
     <h1>DATOS GENERALES DE VOLADURA</h1>
       <h2>Nueva Voladura</h2>
-      <FormularioVoladura nrovoladura={0} fecha={new Date()} fase={''} nivel={0} malla={''} id={''}/>
+      <FormularioVoladura nrovoladura={0} fecha={new Date()} fase={''} nivel={0} malla={''} vid={''}/>
       <TableVoladura />
       
     </div>

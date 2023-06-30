@@ -17,15 +17,6 @@ export type TableData = {
   vid: string;
 };
 
-type TableProps = {
-  total: number;
-  voladuras: TableData[];
-};
-
-const voladuraUpdate = (vid: string) => {
-  console.log(vid)
-}
-
 
 export const TableVoladura: React.FC = React.memo (() => {
 
@@ -33,9 +24,9 @@ export const TableVoladura: React.FC = React.memo (() => {
     total: 0, voladuras: []
   });
 
-  const {total,voladuras}=datos;
+  const {total,voladuras}=datos; 
   useEffect(() => {
-    axios.get('http://localhost:8081/api/voladuras')
+    axios.get(`${process.env.REACT_APP_API_URL}/voladuras`)
     .then(response => {
       setData(response.data);
     })
@@ -69,10 +60,6 @@ export const TableVoladura: React.FC = React.memo (() => {
   const keys = voladuras.length > 0 ? Object.keys(voladuras[0]) : [];
   keys.pop();
 
-  useEffect(() => {
-    
-    console.log('NRO DE VOLADURA',voladuras)
-  }, [])
   
 //ESTA FUNCION SIRVE PARA EDITAR LOS DATOS Y ENVIAR UN ID EXISTENTE
   const editData = (voladuraSelect: TableData) => {
@@ -85,6 +72,18 @@ export const TableVoladura: React.FC = React.memo (() => {
     setId(vid);
     openSelect();
 
+  }
+  const deletData = (vid:string)=>{
+    setId(vid);
+    axios.delete(`${process.env.REACT_APP_API_URL}/voladuras/${vid}`)
+    .then(response => {
+        console.log('Se elimino la informacion correctamente', response.data);
+        window.location.reload();
+    })
+    .catch(error => {
+        console.log('Error al enviar la información', error);
+    });
+  
   }
 
   
@@ -119,7 +118,8 @@ export const TableVoladura: React.FC = React.memo (() => {
                       nrovoladura, fecha, fase,
                       nivel, malla, vid
                     })}><HiPencil /></Button>
-                  <Button className='btn btn-danger' ><MdDelete /></Button>
+                  <Button className='btn btn-danger' onClick={() => deletData(vid)} 
+                   ><MdDelete /></Button>
                   <Button className=' btn btn-warning button-options mx-3' 
                     onClick={() => selectData(vid)} 
                   ><FiEye /></Button>

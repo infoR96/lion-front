@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { GeneralData } from '../interfaces.tsx/interfaces';
 import { FormularioVoladura } from './FormularioVoladura';
-import { TableData } from './TablaVoladura';
 
 type ModalProps = {
   show:boolean;
-  data: TableData;
+  data: GeneralData;
   handleClose:()=>void; 
 
 }
@@ -24,13 +24,12 @@ export const ModalEdicionGeneral =({handleClose,data,show}:ModalProps) => {
         </Modal.Header>
         <Modal.Body className='bg-dark'>
             <FormularioVoladura nrovoladura={data.nrovoladura} fecha={data.fecha} fase={data.fase} 
-            nivel={data.nivel} malla={data.malla} id={data.vid} />
+            nivel={data.nivel} malla={data.malla} vid={data.vid} />
         </Modal.Body>
         <Modal.Footer className='bg-dark'>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" >Understood</Button>
         </Modal.Footer>
       </Modal>
     </>

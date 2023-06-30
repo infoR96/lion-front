@@ -1,20 +1,10 @@
 import axios from 'axios';
-import { format } from 'date-fns';
-import { FormikErrors, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { GeneralData } from '../interfaces.tsx/interfaces';
 
 
-interface FormValues {
-    nrovoladura: number;
-    fecha: Date
-    fase: string;
-    nivel: number;
-    malla: string;
-    id:string
-}
-
-export const FormularioVoladura = (data:FormValues) => {
-    console.log('DATA', data)
+export const FormularioVoladura = (data:GeneralData) => {
     const {  values, errors, handleSubmit, touched, getFieldProps } = useFormik({
         initialValues: data  || {
             nrovoladura: 0,
@@ -24,16 +14,24 @@ export const FormularioVoladura = (data:FormValues) => {
             malla: ''
         },
         onSubmit: (values) => {
-           if(!values.id){
-            axios.post('http://localhost:8081/api/voladuras', values)
+            console.log('SE IMPRIME')
+           if(!values.vid){
+            axios.post(`${process.env.REACT_APP_API_URL}/voladuras`, values)
                 .then(response => {
                     console.log('Se envió la información correctamente', response.data);
                 })
                 .catch(error => {
                     console.log('Error al enviar la información', error);
                 });
+                window.location.reload();
             }else{
-                console.log('mira',values.id)
+                axios.put(`${process.env.REACT_APP_API_URL}/voladuras/${data.vid}`, values)
+                .then(response => {
+                    console.log('Se envió la información correctamente', response.data);
+                })
+                .catch(error => {
+                    console.log('Error al enviar la información', error);
+                });
             }
 
         },
@@ -59,7 +57,7 @@ export const FormularioVoladura = (data:FormValues) => {
     return (
         <div className='col my-4'>
             <form onSubmit={handleSubmit} noValidate>
-                <label htmlFor="nroVoladura">nroVoladura</label>
+                <label htmlFor="nrovoladura">nroVoladura</label>
                 <input
                     type="number"
                     {... getFieldProps('nrovoladura')}/>
@@ -90,7 +88,7 @@ export const FormularioVoladura = (data:FormValues) => {
                 {touched.malla && errors.malla && <span>{errors.malla}</span>}
 
                 {
-                    data.id?
+                    data.vid?
                     <button style={{width:90}} className='btn btn-primary' type="submit">Actualizar</button>:
                     <button style={{width:90}} className='btn btn-primary' type="submit">Guardar</button>
                 }

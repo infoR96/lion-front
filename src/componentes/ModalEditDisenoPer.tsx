@@ -23,7 +23,8 @@ export const ModalEdicionDisenoPer =({handleClose,data,show}:ModalProps) => {
           <Modal.Title >Editar datos</Modal.Title>
         </Modal.Header>
         <Modal.Body className='bg-dark'>
-           <FormularioDisenoPer/>
+           <FormularioDisenoPer nrovoladura={data.nrovoladura} burden={data.burden} 
+           espaciamiento={data.espaciamiento} dureza={data.dureza} vid={data.vid}   />
         </Modal.Body>
         <Modal.Footer className='bg-dark'>
           <Button variant="secondary" onClick={handleClose}>
