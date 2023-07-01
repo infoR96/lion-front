@@ -48,16 +48,16 @@ const voladuranicialState: Voladura = {
     diametro: 9
 },
  sismografia:{
-    nroVoladura:0,
-    registrado:false,
-    ptoMoni: 'P42',
+    nrovoladura:0,
+    ptomoni: 'P42',
     distancia: 299,
-    cargaOperante:300,
-    vppDiseno:6.67,
-    vppReal:9.3,
+    cargaoperante:300,
+    vppdiseno:6.67,
+    vppreal:9.3,
     k:1500,
     alpha:1.9,
     vid:''
+    
 },
  medTaladros:{
     registrado:false,

@@ -10,12 +10,11 @@ import { VoladuraSeleccionada } from './VoladuraSeleccionada';
 import { FiEye } from 'react-icons/fi';
 
 
-
 export const TableDiesenoVol: React.FC = () => {
   const [show, setShow] = useState(false);
 
   const [datos, setData] = useState({
-    total: 1, disenoVoladuras: []
+    total: 0, disenoVoladuras: []
   });
   const { total, disenoVoladuras } = datos;
 
@@ -64,7 +63,6 @@ export const TableDiesenoVol: React.FC = () => {
   }
 
   const deletData = (vid:string)=>{
-    console.log('idddd',vid)
     setId(vid);
     axios.delete(`${process.env.REACT_APP_API_URL}/disenoVoladura/${vid}`)
     .then(response => {
@@ -115,8 +113,6 @@ export const TableDiesenoVol: React.FC = () => {
           ))}
         </tbody>
       </table>
-
-
     </div>
   );
 };

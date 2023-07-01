@@ -1,45 +1,58 @@
 import axios from 'axios';
 import { FormikErrors, useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Sismografia } from '../interfaces.tsx/interfaces';
 
 
-export const FormularioSismografia = () => {
+export const FormularioSismografia = (data:Sismografia) => {
 
     const {  values, errors, handleSubmit, touched, getFieldProps } = useFormik({
-        initialValues: {
-            nroVoladura: 0,
-            ptoMoni: 'P42',
+        initialValues: data || {
+            nrovoladura: 0,
+            ptomoni: 'P42',
             distancia: 299,
-            cargaOperante:300,
-            vppDiseno:6.67,
-            vppReal:9.3,
+            cargaoperante:300,
+            vppdiseno:6.67,
+            vppreal:9.3,
             k:1500,
             alpha:1.9 
         },
-        onSubmit: (values) => {
-            axios.post('http://localhost:8081/api/voladuras', values)
-                .then(response => {
-                    console.log('Se envió la información correctamente', response.data);
-                })
-                .catch(error => {
-                    console.log('Error al enviar la información', error);
-                });
+        onSubmit: (data) => {
+            if(!data.vid){
+                axios.post(`${process.env.REACT_APP_API_URL}/sismografia`, data)
+                    .then(response => {
+                        console.log('Se envió la información correctamente', response.data);
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.log('Error al enviar la información', error);
+                    });
+                }else{
+                    axios.put(`${process.env.REACT_APP_API_URL}/sismografia/${data.vid}`, data)
+                    .then(response => {
+                        console.log('Se envió la información correctamente', response.data);
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.log('Error al enviar la información', error);
+                    });
+                }
         },
         validationSchema: Yup.object({
-            nroVoladura: Yup.number()
+            nrovoladura: Yup.number()
                             .required(),
 
-            ptoMoni: Yup.number().
+            ptomoni: Yup.string().
                         required('Requerido'),
             distancia: Yup.number().
                         required('Requerido'),
-            cargaOperante: Yup.number().
+            cargaoperante: Yup.number().
                         required('Requerido'),
           
-            vppDiseno: Yup.number().
+            vppdiseno: Yup.number().
                         required('Requerido'),
           
-            vppReal: Yup.number().
+            vppreal: Yup.number().
                         required('Requerido'),
           
             k: Yup.number().
@@ -54,56 +67,60 @@ export const FormularioSismografia = () => {
     return (
         <div className='col my-4'>
             <form onSubmit={handleSubmit} noValidate>
-                <label htmlFor="nroVoladura">nroVoladura</label>
+                <label htmlFor="nrovoladura">nroVoladura</label>
                 <input
                     type="number"
-                    {... getFieldProps('nroVoladura')}/>
+                    {... getFieldProps('nrovoladura')}/>
 
-                {touched.nroVoladura && errors.nroVoladura && <span>{errors.nroVoladura}</span>}
-                <label htmlFor="ptoMoni">Punto Monitoreado</label>
+                {touched.nrovoladura && errors.nrovoladura && <span>{errors.nrovoladura}</span>}
+                <label htmlFor="ptomoni">Punto Monitoreado</label>
                 <input
                     type="string"
-                    {... getFieldProps('ptoMoni')}/>
+                    {... getFieldProps('ptomoni')}/>
                 
-                {touched.ptoMoni && errors.ptoMoni && <span>{errors.ptoMoni}</span>}
+                {touched.ptomoni && errors.ptomoni && <span>{errors.ptomoni}</span>}
                 <label htmlFor="distancia">Distancia</label>
                 <input
                     type="number"
                     {... getFieldProps('distancia')}/>
                     {touched.distancia && errors.distancia && <span>{errors.distancia}</span>}
 
-                <label htmlFor="cargaOperante">Carga Operante</label>
+                <label htmlFor="cargaoperante">Carga Operante</label>
                 <input
-                    type="text"
-                    {... getFieldProps('cargaOperante')}/>
-                    {touched.cargaOperante && errors.cargaOperante && <span>{errors.cargaOperante}</span>}
+                    type="number"
+                    {... getFieldProps('cargaoperante')}/>
+                    {touched.cargaoperante && errors.cargaoperante && <span>{errors.cargaoperante}</span>}
                 
-                <label htmlFor="vppDiseno">VPP Diseno mm/s</label>
+                <label htmlFor="vppdiseno">VPP Diseno mm/s</label>
                 <input
-                    type="text"
-                    {... getFieldProps('vppDiseno')}/>
-                    {touched.vppDiseno && errors.vppDiseno && <span>{errors.vppDiseno}</span>}
+                    type="number"
+                    {... getFieldProps('vppdiseno')}/>
+                    {touched.vppdiseno && errors.vppdiseno && <span>{errors.vppdiseno}</span>}
                
-                <label htmlFor="vppDiseno">VPP Real mm/s</label>
+                <label htmlFor="vppdiseno">VPP Real mm/s</label>
                 <input
-                    type="text"
-                    {... getFieldProps('vppReal')}/>
-                    {touched.vppReal && errors.vppReal && <span>{errors.vppReal}</span>}
+                    type="number"
+                    {... getFieldProps('vppreal')}/>
+                    {touched.vppreal && errors.vppreal && <span>{errors.vppreal}</span>}
                 
                 <label htmlFor="k">k</label>
                 <input
-                    type="text"
+                    type="number"
                     {... getFieldProps('k')}/>
                     {touched.k && errors.k && <span>{errors.k}</span>}
         
                 <label htmlFor="alpha">alpha</label>
                 <input
-                    type="text"
+                    type="number"
                     {... getFieldProps('alpha')}/>
                     {touched.alpha && errors.alpha && <span>{errors.alpha}</span>}
         
 
-                <button type="submit">Submit</button>
+                    {
+                    data.vid?
+                    <button style={{width:90}} className='btn btn-primary' type="submit" >Actualizar</button>:
+                    <button style={{width:90}} className='btn btn-primary' type="submit">Guardar</button>
+                }
 
             </form>
 

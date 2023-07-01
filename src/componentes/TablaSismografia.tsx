@@ -11,23 +11,32 @@ import { FiEye } from 'react-icons/fi';
 
 
 
-type TableProps = {
-  total: number;
-  voladuras: Sismografia[];
-};
 
-
-export const TableSismografia: React.FC<TableProps> = ({ total, voladuras }) => {
+export const TableSismografia: React.FC = () => {
 
   const [show, setShow] = useState(false);
-  const [vid, setVid] = useState({
-    registrado: false,
-    nroVoladura: 0,
-    ptoMoni: 'P42',
+  const [datos, setData] = useState({
+    total: 0, sismografias: []
+  });
+  const { total, sismografias } = datos;
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}/sismografia`)
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+  }, [])
+
+  const [initstate, setInitstate] = useState({
+    nrovoladura: 0,
+    ptomoni: 'P42',
     distancia: 299,
-    cargaOperante: 300,
-    vppDiseno: 6.67,
-    vppReal: 9.3,
+    cargaoperante: 300,
+    vppdiseno: 6.67,
+    vppreal: 9.3,
     k: 1500,
     alpha: 1.9,
     vid: ''
@@ -41,22 +50,40 @@ export const TableSismografia: React.FC<TableProps> = ({ total, voladuras }) => 
   // para formulario
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const getVid = (data: Sismografia) => setInitstate(data);
 
-  const editData = (voladuraSelect: Sismografia) => {
+  const keys = sismografias.length > 0 ? Object.keys(sismografias[0]) : [];
+  keys.pop();
+
+  const editData = (sismografialSelect: Sismografia) => {
     handleShow();
+    getVid(sismografialSelect)
+    console.log('DATOSSSS', sismografialSelect)
+    console.log('DATOSSSS', initstate)
+
   }
 
   const selectData = (vid: string) => {
     openSelect();
     console.log('SELECCIONADO', vid)}
 
-    const keys = Object.keys(voladuras[0]);
-    keys.shift();
-    keys.pop();
+    const deletData = (vid:string)=>{
+      setId(vid);
+      axios.delete(`${process.env.REACT_APP_API_URL}/sismografia/${vid}`)
+      .then(response => {
+          console.log('Se elimino la informacion correctamente', response.data);
+          window.location.reload();
+      })
+      .catch(error => {
+          console.log('Error al enviar la información', error);
+      });
+    
+    }
+
 
     return (
       <div className=' bg-white rounded mt-5'>
-        <ModalEditSismografia data={vid} show={show} handleClose={handleClose} />
+        <ModalEditSismografia data={initstate} show={show} handleClose={handleClose} />
         <VoladuraSeleccionada id={id} show={showSelect} closeSelect={closeSelect} />
         <table className="table ">
           <thead>
@@ -71,25 +98,24 @@ export const TableSismografia: React.FC<TableProps> = ({ total, voladuras }) => 
             </tr>
           </thead>
           <tbody>
-            {voladuras.map(({ nroVoladura, registrado, ptoMoni, distancia, cargaOperante, vppDiseno, vppReal, k, alpha, vid }: Sismografia) => (
-              <tr key={nroVoladura} >
-                <td className="data-cell ">{nroVoladura}</td>
-                <td className="data-cell ">{ptoMoni}</td>
+            {sismografias.map(({ nrovoladura, ptomoni, distancia, cargaoperante, vppdiseno, vppreal, k, alpha, vid }: Sismografia) => (
+              <tr key={nrovoladura} >
+                <td className="data-cell ">{nrovoladura}</td>
+                <td className="data-cell ">{ptomoni}</td>
                 <td className="data-cell ">{distancia}</td>
-                <td className="data-cell ">{cargaOperante}</td>
-                <td className="data-cell ">{vppDiseno}</td>
-                <td className="data-cell ">{vppReal}</td>
+                <td className="data-cell ">{cargaoperante}</td>
+                <td className="data-cell ">{vppdiseno}</td>
+                <td className="data-cell ">{vppreal}</td>
                 <td className="data-cell ">{k}</td>
                 <td className="data-cell ">{alpha}</td>
                 <td className="data-cell ">
                   <div className='horizontal-container '>
                     <Button className='button-options'
                       onClick={() => editData({
-                        nroVoladura, ptoMoni, distancia, cargaOperante, vppDiseno,
-                        vppReal, k, alpha, registrado, vid
+                        nrovoladura,ptomoni,distancia,cargaoperante,vppdiseno,vppreal,k,alpha, vid
                       })}
                     ><HiPencil /></Button>
-                    <Button className='btn btn-danger'
+                    <Button className='btn btn-danger'onClick={() => deletData(vid)}
 
                     ><MdDelete /></Button>
                     <Button className=' btn btn-warning button-options mx-3'

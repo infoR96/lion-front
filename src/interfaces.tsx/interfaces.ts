@@ -34,13 +34,12 @@ export interface MedTaladros{
   Obeservaciones:string
 }
 export interface Sismografia{
-    registrado: boolean;
-    nroVoladura:number;
-    ptoMoni: string;
+    nrovoladura:number;
+    ptomoni: string;
     distancia: number;
-    cargaOperante: number;
-    vppDiseno: number;
-    vppReal: number;
+    cargaoperante: number;
+    vppdiseno: number;
+    vppreal: number;
     k: number;
     alpha: number;
     vid:string;

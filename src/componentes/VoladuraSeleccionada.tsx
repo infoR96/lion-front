@@ -121,11 +121,11 @@ export const VoladuraSeleccionada = ({closeSelect,show,id='64797186af2d1352cd822
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell ">{sismografia.ptoMoni}</td>
+                        <td className="data-cell ">{sismografia.ptomoni}</td>
                         <td className="data-cell ">{sismografia.distancia}</td>
-                        <td className="data-cell ">{sismografia.cargaOperante}</td>
-                        <td className="data-cell ">{sismografia.vppDiseno}</td>
-                        <td className="data-cell ">{sismografia.vppReal}</td>
+                        <td className="data-cell ">{sismografia.cargaoperante}</td>
+                        <td className="data-cell ">{sismografia.vppdiseno}</td>
+                        <td className="data-cell ">{sismografia.vppreal}</td>
                         <td className="data-cell ">{sismografia.k}</td>
                         <td className="data-cell ">{sismografia.alpha}</td>
 
