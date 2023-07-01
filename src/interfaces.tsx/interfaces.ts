@@ -17,10 +17,9 @@ export interface DisenoPer {
     vid:string;
 }
 export interface DisenoVol{
-    nroVoladura:number;
-    registrado: boolean;
-    tipoExplosivo:string;
-    kgExplosivo:string;
+    nrovoladura:number;
+    tipoexplosivo:string;
+    kgexplosivo:string;
     vid:string;
 }
 export interface MedTaladros{

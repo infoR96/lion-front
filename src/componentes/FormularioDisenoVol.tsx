@@ -1,32 +1,45 @@
 import axios from 'axios';
-import { FormikErrors, useFormik } from 'formik';
+import {  useFormik } from 'formik';
 import * as Yup from 'yup';
+import { DisenoVol } from '../interfaces.tsx/interfaces';
 
 
-export const FormularioDisenoVol = () => {
+export const FormularioDisenoVol = (data:DisenoVol) => {
 
     const {  values, errors, handleSubmit, touched, getFieldProps } = useFormik({
-        initialValues: {
-            nroVoladura: 0,
-            tipoExplosivo: 'ANFO',
-            kgExplosivo: '273_300',
+        initialValues: data||{
+            nrovoladura: 0,
+            tipoexplosivo: '',
+            kgexplosivo: '',
         },
-        onSubmit: (values) => {
-            axios.post('http://localhost:8081/api/voladuras', values)
-                .then(response => {
-                    console.log('Se envió la información correctamente', response.data);
-                })
-                .catch(error => {
-                    console.log('Error al enviar la información', error);
-                });
+        onSubmit: (data) => {
+            if(!data.vid){
+                axios.post(`${process.env.REACT_APP_API_URL}/disenoVoladura`, data)
+                    .then(response => {
+                        console.log('Se envió la información correctamente', response.data);
+                    })
+                    .catch(error => {
+                        console.log('Error al enviar la información', error);
+                    });
+                    window.location.reload();
+                }else{
+                    axios.put(`${process.env.REACT_APP_API_URL}/disenoVoladura/${data.vid}`, data)
+                    .then(response => {
+                        console.log('Se envió la información correctamente', response.data);
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.log('Error al enviar la información', error);
+                    });
+                }
         },
         validationSchema: Yup.object({
-            nroVoladura: Yup.number()
+            nrovoladura: Yup.number()
                             .required(),
 
-            tipoExplosivo: Yup.string().
+            tipoexplosivo: Yup.string().
                         required('Requerido'),
-            kgExplosivo: Yup.string().
+            kgexplosivo: Yup.string().
                         required('Requerido'),
                     
         })
@@ -37,24 +50,29 @@ export const FormularioDisenoVol = () => {
             
 
             <form onSubmit={handleSubmit} noValidate>
-                <label htmlFor="nroVoladura">nroVoladura</label>
+                <label htmlFor="nrovoladura">nroVoladura</label>
                 <input
                     type="number"
-                    {... getFieldProps('nroVoladura')}/>
+                    {... getFieldProps('nrovoladura')}/>
 
-                {touched.nroVoladura && errors.nroVoladura && <span>{errors.nroVoladura}</span>}
-                <label htmlFor="tipoExplosivo">Tipo de Explosivo</label>
+                {touched.nrovoladura && errors.nrovoladura && <span>{errors.nrovoladura}</span>}
+                <label htmlFor="tipoexplosivo">Tipo de Explosivo</label>
                 <input
                     type="text"
-                    {... getFieldProps('tipoExplosivo')}/>
+                    {... getFieldProps('tipoexplosivo')}/>
                 
-                {touched.tipoExplosivo && errors.tipoExplosivo && <span>{errors.tipoExplosivo}</span>}
-                <label htmlFor="kgExplosivo">Total Kg de Explosivo</label>
+                {touched.tipoexplosivo && errors.tipoexplosivo && <span>{errors.tipoexplosivo}</span>}
+                <label htmlFor="kgexplosivo">Total Kg de Explosivo</label>
                 <input
                     type="text"
-                    {... getFieldProps('kgExplosivo')}/>
+                    {... getFieldProps('kgexplosivo')}/>
+                    {touched.kgexplosivo && errors.kgexplosivo && <span>{errors.kgexplosivo}</span>}
     
-                <button type="submit">Submit</button>
+    {
+                    data.vid?
+                    <button style={{width:90}} className='btn btn-primary' type="submit" >Actualizar</button>:
+                    <button style={{width:90}} className='btn btn-primary' type="submit">Guardar</button>
+                }
 
             </form>
 

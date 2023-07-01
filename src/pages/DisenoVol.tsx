@@ -1,17 +1,13 @@
-import {   TableDiesenoVol} from '../componentes';
+import {   FormularioDisenoVol, TableDiesenoVol} from '../componentes';
 
 export const DisenoVol = () => {
   return (
     <div className="container">
     <div  className=" row justify-content-center">
     <h1>DISENO DE CONEXION DE VOLADURA</h1>
-      <TableDiesenoVol  total={3}  voladuras={[{
-      registrado:false,
-      nroVoladura:0, 
-      tipoExplosivo:'ANFO',
-      kgExplosivo:'90_220',
-      vid:''
-    }]}/>
+    <h2>Nuevo Diseno de Voladura</h2>
+    <FormularioDisenoVol nrovoladura={0} tipoexplosivo={''} kgexplosivo={''} vid={''}/>
+      <TableDiesenoVol />
     </div>
     </div>
   );

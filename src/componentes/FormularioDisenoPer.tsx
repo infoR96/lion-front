@@ -14,7 +14,6 @@ export const FormularioDisenoPer = (data:DisenoPer) => {
             dureza: 'DURO',
         },
         onSubmit: (data) => {
-            console.log('DATOOOOS',values)
             if(!data.vid){
                 axios.post(`${process.env.REACT_APP_API_URL}/disenoPerforacion`, data)
                     .then(response => {

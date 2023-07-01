@@ -71,10 +71,9 @@ const voladuranicialState: Voladura = {
     Obeservaciones: 'Precorte'
  },
  disenoVol:{
-    registrado:false,
-    tipoExplosivo: 'ANFO',
-    kgExplosivo: '273_300',
-    nroVoladura:0,
+    tipoexplosivo: 'ANFO',
+    kgexplosivo: '273_300',
+    nrovoladura:0,
     vid:''
  },
  disenoPer:{

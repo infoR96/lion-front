@@ -23,7 +23,8 @@ export const ModalEdicionDisenoVol =({handleClose,data,show}:ModalProps) => {
           <Modal.Title >Editar datos</Modal.Title>
         </Modal.Header>
         <Modal.Body className='bg-dark'>
-           <FormularioDisenoVol/>
+           <FormularioDisenoVol nrovoladura={data.nrovoladura} tipoexplosivo={data.tipoexplosivo}
+            kgexplosivo={data.kgexplosivo} vid={data.vid}/>
         </Modal.Body>
         <Modal.Footer className='bg-dark'>
           <Button variant="secondary" onClick={handleClose}>

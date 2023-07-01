@@ -89,16 +89,16 @@ export const VoladuraSeleccionada = ({closeSelect,show,id='64797186af2d1352cd822
             <table className="table " >
                 <thead>
                     <tr>
+                        
                         <th className="header-cell " >Tipo de Explosivo</th>
                         <th className="header-cell " >Total kg de Explosivo</th>
-                        <th className="header-cell " >Dureza</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell ">{disenoVol.tipoExplosivo}</td>
-                        <td className="data-cell ">{disenoVol.kgExplosivo}</td>
-                        <td className="data-cell ">{disenoPer.dureza}</td> 
+                        
+                        <td className="data-cell ">{disenoVol.tipoexplosivo}</td>
+                        <td className="data-cell ">{disenoVol.kgexplosivo}</td>
                         {/* VER LA POSIBILIDAD DE CAMBIO EN LA DUREZA DE VOLADURA */}
 
                     </tr>

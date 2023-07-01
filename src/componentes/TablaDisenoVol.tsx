@@ -10,19 +10,31 @@ import { VoladuraSeleccionada } from './VoladuraSeleccionada';
 import { FiEye } from 'react-icons/fi';
 
 
-type TableProps = {
-  total: number;
-  voladuras:DisenoVol[];
-};
 
-
-export const TableDiesenoVol: React.FC<TableProps> = ({total,voladuras}) => {
+export const TableDiesenoVol: React.FC = () => {
   const [show, setShow] = useState(false);
-  const [vid, setVid] = useState({
-    registrado:false,
-    tipoExplosivo: 'ANFO',
-    kgExplosivo: '273_300',
-    nroVoladura:0,
+
+  const [datos, setData] = useState({
+    total: 1, disenoVoladuras: []
+  });
+  const { total, disenoVoladuras } = datos;
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}/disenoVoladura`)
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+
+  }, [])
+
+  const [initstate, setInitstate] = useState({
+    tipoexplosivo: '',
+    kgexplosivo: '',
+    nrovoladura:0,
     vid:''
   });
   const [id, setId] = useState('')
@@ -33,10 +45,16 @@ export const TableDiesenoVol: React.FC<TableProps> = ({total,voladuras}) => {
   const openSelect = () => setShowSelect(true)
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const getVid = (data: DisenoVol) => setInitstate(data);
   
+  const keys = disenoVoladuras.length > 0 ? Object.keys(disenoVoladuras[0]) : [];
   
-  const editData = (voladuraSelect: DisenoVol) => {
+  // keys.shift();
+  keys.pop();
+
+  const editData = (disenovolSelect: DisenoVol) => {
     handleShow();
+    getVid(disenovolSelect)
 
   }
   const selectData = (vid:string)=>{
@@ -44,16 +62,23 @@ export const TableDiesenoVol: React.FC<TableProps> = ({total,voladuras}) => {
     console.log('SELECCIONADO',vid)
 
   }
-  const keys =Object.keys(voladuras[0]);
-  keys.shift();
-  keys.pop();
 
- 
-  console.log('jaja',total);
-  // const {voladuras, total}=datos;
+  const deletData = (vid:string)=>{
+    console.log('idddd',vid)
+    setId(vid);
+    axios.delete(`${process.env.REACT_APP_API_URL}/disenoVoladura/${vid}`)
+    .then(response => {
+        console.log('Se elimino la informacion correctamente', response.data);
+        window.location.reload();
+    })
+    .catch(error => {
+        console.log('Error al enviar la información', error);
+    });
+  
+  }
   return (
     <div className=' bg-white rounded mt-5'>
-       <ModalEdicionDisenoVol data={vid} show={show} handleClose={handleClose} />
+       <ModalEdicionDisenoVol data={initstate} show={show} handleClose={handleClose} />
        <VoladuraSeleccionada id={id} show={showSelect} closeSelect={closeSelect} />
       <table className="table ">
         <thead>
@@ -68,19 +93,19 @@ export const TableDiesenoVol: React.FC<TableProps> = ({total,voladuras}) => {
           </tr>
         </thead>
         <tbody>
-          {voladuras.map(({ nroVoladura, tipoExplosivo,kgExplosivo,registrado,vid}: DisenoVol) => (
-            <tr key={nroVoladura} >
-              <td className="data-cell ">{nroVoladura}</td>
-              <td className="data-cell ">{tipoExplosivo}</td>
-              <td className="data-cell ">{kgExplosivo}</td>
+          {disenoVoladuras.map(({ nrovoladura, tipoexplosivo,kgexplosivo,vid}: DisenoVol) => (
+            <tr key={nrovoladura} >
+              <td className="data-cell ">{nrovoladura}</td>
+              <td className="data-cell ">{tipoexplosivo}</td>
+              <td className="data-cell ">{kgexplosivo}</td>
               <td className="data-cell ">
                 <div className='horizontal-container '>
                   <Button className='button-options'
                   onClick={()=>editData({
-                    nroVoladura,tipoExplosivo,kgExplosivo,registrado,vid
+                    nrovoladura,tipoexplosivo,kgexplosivo,vid
                   })}
                   ><HiPencil/></Button>
-                  <Button className='btn btn-danger' ><MdDelete/></Button>
+                  <Button className='btn btn-danger' onClick={() => deletData(vid)}><MdDelete/></Button>
                   <Button className=' btn btn-warning button-options mx-3' 
                     onClick={() => selectData(vid)} 
                   ><FiEye /></Button>
