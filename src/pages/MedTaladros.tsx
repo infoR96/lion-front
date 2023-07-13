@@ -5,20 +5,8 @@ export const MedTaladros = () => {
     <div className="container">
       <div className=" row justify-content-center">
         <h1>MEDICION DE TALADROS</h1>
-        <FormularioMedTaladros />
-        <TableMedTaladros total={3} voladuras={[{
-          nroVoladura: 34,
-          medido: true,
-          perforados: 229,
-          tapados: 0,
-          reperf: 0,
-          adicional: 0,
-          aguaMenor: 29,
-          aguaMayor: 142,
-          metrosPerforados: 2389,
-          Obeservaciones: 'Precorte'
-
-        }]} />
+        <FormularioMedTaladros nrovoladura={0} perforados={0} tapados={0} reperforados={0} adicional={0} aguamenorauno={0} aguamayorauno={0} metrosperforados={0} vid={''} />
+        <TableMedTaladros  />
       </div>
     </div>
   )

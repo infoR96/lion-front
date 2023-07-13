@@ -1,113 +1,123 @@
-import { Formik, Field, Form, useField, ErrorMessage } from 'formik';
-import { string } from 'yargs';
+import axios from 'axios';
+import { Formik, Field, Form, useField, ErrorMessage, useFormik } from 'formik';
 import * as Yup from 'yup';
+import { MedTaladros } from '../interfaces.tsx/interfaces';
 
-export const FormularioMedTaladros = () => {
+export const FormularioMedTaladros = (data:MedTaladros) => {
 
-    return (
-        <div className='col my-4'>
-            <Formik initialValues={{
-                nroVoladura: 34,
-                medido: true,
-                perforados: 229,
-                tapados: 0,
-                reperf: 0,
-                adicional: 0,
-                aguaMenor: 29,
-                aguaMayor: 142,
-                metrosPerforados: 2389,
-                Obeservaciones: 'Precorte'
-
-            }}
-                onSubmit={(values) => {
-                    console.log(values)
-                }}
-                validationSchema={Yup.object({
-                    nroVoladura: Yup.number()
+    const {  values, errors, handleSubmit, touched, getFieldProps } = useFormik({
+        initialValues: data || {
+            nrovoladura: 34,
+            perforados: 229,
+            tapados: 0,
+            reperforados: 0,
+            adicional: 0,
+            aguamenorauno: 29,
+            aguamayorauno: 142,
+            metrosperforados: 2389,
+        },
+        onSubmit: (data) => {
+            if(!data.vid){
+                axios.post(`${process.env.REACT_APP_API_URL}/medtaladros`, data)
+                    .then(response => {
+                        console.log('Se envió la información correctamente', response.data);
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.log('Error al enviar la información', error);
+                    });
+                }else{
+                    axios.put(`${process.env.REACT_APP_API_URL}/medtaladros/${data.vid}`, data)
+                    .then(response => {
+                        console.log('Se envió la información correctamente', response.data);
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.log('Error al enviar la información', error);
+                    });
+                }
+        },validationSchema:Yup.object({
+                    nrovoladura: Yup.number()
                         .required(),
-
-                    medido: Yup.boolean().
-                        required('Requerido'),
                     perforados: Yup.number().
                         required('Requerido'),
                     tapados: Yup.number().
                         required('Requerido'),
-                    reperf: Yup.number().
+                    reperforados: Yup.number().
                         required('Requerido'),
                     adicional: Yup.number().
                         required('Requerido'),
-                    aguaMenor: Yup.number().
+                    aguamenorauno: Yup.number().
                         required('Requerido'),
-                    aguaMayor: Yup.string().
+                    aguamayorauno: Yup.number().
                         required('Requerido'),
-                    metrosPerforados: Yup.number().
+                    metrosperforados: Yup.number().
                         required('Requerido'),
-                    Obeservaciones: Yup.string().
-                        required('Requerido')
-                })}>
+                   
+                })
+            });
+            return (
+                <div className='col my-4'>
+                    <form onSubmit={handleSubmit} noValidate>
+                        <label htmlFor="nrovoladura">nrovoladura</label>
+                        <input
+                            type="number"
+                            {... getFieldProps('nrovoladura')}/>
+        
+                        {touched.nrovoladura && errors.nrovoladura && <span>{errors.nrovoladura}</span>}
 
-                {
-                    formik => (
-                        <Form>
-                            <label htmlFor="nroVoladura">nroVoladura</label>
-                            <Field name="nroVoladura" type='number' />
-                            <ErrorMessage name="nroVoladura" component='span' />
-
-                            <label htmlFor="medido">medido</label>
-                            <Field name='medido' type="boolean" />
-                            <ErrorMessage name='medido' />
-
-                            <label htmlFor="perforados">Perforados</label>
-                            <Field name='perforados' type="number" />
-                            <ErrorMessage name='perforados' />
-
-                            <label htmlFor="tapados">Tapados</label>
-                            <Field name='tapados' type="text" />
-                            <ErrorMessage name='tapados' />
-
-                            <label htmlFor="tipoMezcla">Tipo de Mezcla</label>
-                            <Field name='tipoMezcla' type="text" />
-                            <ErrorMessage name='tipoMezcla' />
-
-                            <label htmlFor="reperforacion">Reperforacion</label>
-                            <Field name='reperforacion' type="number" />
-                            <ErrorMessage name='reperforacion' />
-
-                            <label htmlFor="adicional">Adicional</label>
-                            <Field name='adicional' type="number" />
-                            <ErrorMessage name='adicional' />
-
-                            <label htmlFor="aguaMenor">Agua menor a 1m</label>
-                            <Field name='aguaMenor' type="number" />
-                            <ErrorMessage name='aguaMenor' />
-
-                            <label htmlFor="aguaMayor">Agua mayor a 1m</label>
-                            <Field name='aguaMayor' type="number" />
-                            <ErrorMessage name='aguaMayor' />
-
-                            <label htmlFor="metrosPerforados">Metros Perforados</label>
-                            <Field name='metrosPerforados' type="number" />
-                            <ErrorMessage name='metrosPerforados' />
-
-                            <label htmlFor="observaciones">Observaciones</label>
-                            <Field name='observaciones' type="text" />
-                            <ErrorMessage name='observaciones' />
-
-
-
-
-                            <button type="submit">Submit</button>
-
-                        </Form>
-                    )
-
-
-                }
-
-
-            </Formik>
-
-        </div>
-
-    )
-}
+                        <label htmlFor="perforados">Perforados</label>
+                        <input
+                            type="number"
+                            {... getFieldProps('perforados')}/>
+                        
+                        {touched.perforados && errors.perforados && <span>{errors.perforados}</span>}
+                        <label htmlFor="tapados">Tapados</label>
+                        <input
+                            type="number"
+                            {... getFieldProps('tapados')}/>
+                            {touched.tapados && errors.tapados && <span>{errors.tapados}</span>}
+        
+                        <label htmlFor="reperforados">Reperforados</label>
+                        <input
+                            type="number"
+                            {... getFieldProps('reperforados')}/>
+                            {touched.reperforados && errors.reperforados && <span>{errors.reperforados}</span>}
+                        
+                        <label htmlFor="adicional">Adicional</label>
+                        <input
+                            type="number"
+                            {... getFieldProps('adicional')}/>
+                            {touched.adicional && errors.adicional && <span>{errors.adicional}</span>}
+                       
+                        <label htmlFor="aguamenorauno">Agua menor a uno</label>
+                        <input
+                            type="number"
+                            {... getFieldProps('aguamenorauno')}/>
+                            {touched.aguamenorauno && errors.aguamenorauno && <span>{errors.aguamenorauno}</span>}
+                        
+                        <label htmlFor="agua mayor a uno">Agua mayor a uno</label>
+                        <input
+                            type="number"
+                            {... getFieldProps('aguamayorauno')}/>
+                            {touched.aguamayorauno && errors.aguamayorauno && <span>{errors.aguamayorauno}</span>}
+                
+                        <label htmlFor="metrosperforados">Metros perforados</label>
+                        <input
+                            type="number"
+                            {... getFieldProps('metrosperforados')}/>
+                            {touched.metrosperforados && errors.metrosperforados && <span>{errors.metrosperforados}</span>}
+                
+        
+                            {
+                            data.vid?
+                            <button style={{width:90}} className='btn btn-primary' type="submit" >Actualizar</button>:
+                            <button style={{width:90}} className='btn btn-primary' type="submit">Guardar</button>
+                        }
+        
+                    </form>
+        
+                </div>
+            )
+        
+        }

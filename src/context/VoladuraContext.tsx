@@ -61,15 +61,15 @@ const voladuranicialState: Voladura = {
     
 },
  medTaladros:{
-    registrado:false,
+     nrovoladura:0,
     perforados: 229,
     tapados: 0,
-    reperf: 0,
+    reperforados: 0,
     adicional: 0,
-    aguaMenor: 29,
-    aguaMayor: 142,
-    metrosPerforados: 2389,
-    Obeservaciones: 'Precorte'
+    aguamenorauno: 29,
+    aguamayorauno: 142,
+    metrosperforados: 2389,
+    vid:''
  },
  disenoVol:{
     tipoexplosivo: 'ANFO',

@@ -24,15 +24,15 @@ export interface DisenoVol{
     vid:string;
 }
 export interface MedTaladros{
-    registrado: boolean;
+  nrovoladura:number,  
   perforados:number,
   tapados:number,
-  reperf:number,
+  reperforados:number,
   adicional:number,
-  aguaMenor:number,
-  aguaMayor:number,
-  metrosPerforados:number,
-  Obeservaciones:string
+  aguamenorauno:number,
+  aguamayorauno:number,
+  metrosperforados:number,
+  vid:string,
 }
 export interface Sismografia{
     nrovoladura:number;

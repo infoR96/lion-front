@@ -245,10 +245,9 @@ export const VoladuraSeleccionada = ({closeSelect,show,id='64797186af2d1352cd822
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell ">{medTaladros.aguaMenor}</td>
-                        <td className="data-cell ">{medTaladros.aguaMayor}</td>
-                        <td className="data-cell ">{medTaladros.metrosPerforados}</td>
-                        <td className="data-cell ">{medTaladros.Obeservaciones}</td>
+                        <td className="data-cell ">{medTaladros.aguamenorauno}</td>
+                        <td className="data-cell ">{medTaladros.aguamayorauno}</td>
+                        <td className="data-cell ">{medTaladros.metrosperforados}</td>
                     </tr>
 
                 </tbody>

@@ -31,9 +31,9 @@ export const Navigation = () => {
                         <li>
                             <NavLink to="/medtaladros" className={({ isActive }) => isActive ? 'nav-active' : ''}>Medicion de Taladros</NavLink>
                         </li>
-                        <li>
+                        {/* <li>
                             <NavLink to="/fragmentacion" className={({ isActive }) => isActive ? 'nav-active' : ''}>Fragmentacion</NavLink>
-                        </li>
+                        </li> */}
                     </ul>
                 </nav>
 
@@ -45,7 +45,7 @@ export const Navigation = () => {
                     <Route path="sismografia" element={<Sismografia/>} />
                     <Route path="vod" element={<Vod/>} />
                     <Route path="densidad" element={<Densidad/>} />
-                    <Route path="fragmentacion" element={<Fragmentacion/>} />
+                    {/* <Route path="fragmentacion" element={<Fragmentacion/>} /> */}
                     <Route path="medtaladros" element={<MedTaladros/>} />
 
                     <Route path="/*" element={<Navigate to="/home" replace />} />
