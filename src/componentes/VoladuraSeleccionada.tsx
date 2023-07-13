@@ -149,13 +149,13 @@ export const VoladuraSeleccionada = ({closeSelect,show,id='64797186af2d1352cd822
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell ">{vod.profundidadTaladro}</td>
+                        <td className="data-cell ">{vod.profundidadtaladro}</td>
                         <td className="data-cell ">{vod.densidad}</td>
-                        <td className="data-cell ">{vod.sobrePerforacion}</td>
+                        <td className="data-cell ">{vod.sobreperforacion}</td>
                         <td className="data-cell ">{vod.agua}</td>
                         <td className="data-cell ">{vod.taco}</td>
-                        <td className="data-cell ">{vod.tipoTaco}</td>
-                        <td className="data-cell ">{vod.longitudCarga}</td>
+                        <td className="data-cell ">{vod.tipotaco}</td>
+                        <td className="data-cell ">{vod.longitudcarga}</td>
 
                     </tr>
 
@@ -176,12 +176,12 @@ export const VoladuraSeleccionada = ({closeSelect,show,id='64797186af2d1352cd822
                 <tbody>
                     <tr>
                         <td className="data-cell ">{vod.booster}</td>
-                        <td className="data-cell ">{vod.tipoDetonador}</td>
-                        <td className="data-cell ">{vod.tipoExplosivo}</td>
-                        <td className="data-cell ">{vod.vodPromedio}</td>
+                        <td className="data-cell ">{vod.tipodetonador}</td>
+                        <td className="data-cell ">{vod.tipoexplosivo}</td>
+                        <td className="data-cell ">{vod.vodpromedio}</td>
                         <td className="data-cell ">{vod.probecable}</td>
-                        <td className="data-cell ">{vod.cableCoaxial}</td>
-                        <td className="data-cell ">{vod.diametro}</td>
+                        <td className="data-cell ">{vod.cablecoaxial}</td>
+  
 
                     </tr>
 
@@ -201,11 +201,11 @@ export const VoladuraSeleccionada = ({closeSelect,show,id='64797186af2d1352cd822
                 </thead>
                 <tbody>
                     <tr>
-                        <td className="data-cell ">{densidad.horaInicio}</td>
-                        <td className="data-cell ">{densidad.horaFin}</td>
-                        <td className="data-cell ">{densidad.tipoMezcla}</td>
-                        <td className="data-cell ">{densidad.densidadIninicial}</td>
-                        <td className="data-cell ">{densidad.densidadFinal}</td>
+                        <td className="data-cell ">{densidad.horainicio}</td>
+                        <td className="data-cell ">{densidad.horafin}</td>
+                        <td className="data-cell ">{densidad.tipomezcla}</td>
+                        <td className="data-cell ">{densidad.densidadinicial}</td>
+                        <td className="data-cell ">{densidad.densidadfinal}</td>
                         <td className="data-cell ">{densidad.camion}</td>
                         
 

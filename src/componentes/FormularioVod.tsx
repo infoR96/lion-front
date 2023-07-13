@@ -1,74 +1,85 @@
 import axios from 'axios';
 import { FormikErrors, useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Vod } from '../interfaces.tsx/interfaces';
 
 
-export const FormularioVod = () => {
+export const FormularioVod = (data:Vod) => {
 
     const { values, errors, handleSubmit, touched, getFieldProps } = useFormik({
-        initialValues: {
-            nroVoladura: 0,
-            nroTaladro: 124,
-            profundidadTaladro: 10,
+        initialValues: data||{
+            nrovoladura: 0,
+            nrotaladros: 124,
+            profundidadtaladro: 10,
             densidad: 1.33,
-            sobrePerforacion: 0.5,
+            sobreperforacion: 0.5,
             agua: true,
             taco: 5.8,
-            tipoTaco: 'Detritus',
-            longitudCarga: 4.7,
+            tipotaco: 'Detritus',
+            longitudcarga: 4.7,
             booster: 900,
-            tipoDetonador: 'NO ELECTRICO',
-            tipoExplosivo: 'RIOFLEX 7000',
-            vodPromedio: 6754,
-            probecable: 1,
-            cableCoaxial: 30,
-            diametro: 9
+            tipodetonador: 'NO ELECTRICO',
+            tipoexplosivo: 'RIOFLEX 7000',
+            vodpromedio: 6754,
+            probecable: true,
+            cablecoaxial: 30,
         },
-        onSubmit: (values) => {
-            axios.post('http://localhost:8081/api/voladuras', values)
-                .then(response => {
-                    console.log('Se envió la información correctamente', response.data);
-                })
-                .catch(error => {
-                    console.log('Error al enviar la información', error);
-                });
+        onSubmit: (data) => {
+            console.log('AQUINB')
+            if(!data.vid){
+                axios.post(`${process.env.REACT_APP_API_URL}/vod`, data)
+                    .then(response => {
+                        console.log('Se envió la información correctamente', response.data);
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.log('Error al enviar la información', error);
+                    });
+                }else{
+                    axios.put(`${process.env.REACT_APP_API_URL}/vod/${data.vid}`, data)
+                    .then(response => {
+                        console.log('Se envió la información correctamente', response.data);
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.log('Error al enviar la información', error);
+                    });
+                }
         },
         validationSchema: Yup.object({
-            nroVoladura: Yup.number()
+            nrovoladura: Yup.number()
                 .required(),
 
-            profundidadTaladro: Yup.number().
+            profundidadtaladro: Yup.number().
                 required('Requerido'),
             densidad: Yup.number().
                 required('Requerido'),
-            sobrePerforacion: Yup.number().
+            sobreperforacion: Yup.number().
                 required('Requerido'),
-
             agua: Yup.boolean().
                 required('Requerido'),
 
             taco: Yup.number().
                 required('Requerido'),
 
-            tipoTaco: Yup.string().
+            tipotaco: Yup.string().
                 required('Requerido'),
 
-            longitudCarga: Yup.string().
+            longitudcarga: Yup.string().
                 required('Requerido'),
             booster: Yup.number().
                 required('Requerido'),
-            tipoDetonador: Yup.string().
+            tipodetonador: Yup.string().
                 required('Requerido'),
-            tipoExplosivo: Yup.string().
+            tipoexplosivo: Yup.string().
                 required('Requerido'),
-            vodPromedio: Yup.number().
+            vodpromedio: Yup.number().
                 required('Requerido'),
-            probecable: Yup.number().
+            probecable: Yup.boolean().
                 required('Requerido'),
-            cableCoaxial: Yup.number().
+            cablecoaxial: Yup.number().
                 required('Requerido'),
-            diametro: Yup.number().
-                required('Requerido'),
+
 
         })
     });
@@ -76,30 +87,36 @@ export const FormularioVod = () => {
     return (
         <div className='col my-4'>
             <form onSubmit={handleSubmit} noValidate>
-                <label htmlFor="nroVoladura">nroVoladura</label>
+                <label htmlFor="nrovoladura">nroVoladura</label>
                 <input
                     type="number"
-                    {...getFieldProps('nroVoladura')} />
+                    {...getFieldProps('nrovoladura')} />
 
-                {touched.nroVoladura && errors.nroVoladura && <span>{errors.nroVoladura}</span>}
-                <label htmlFor="profundidadTaladro">Profundidad de Taladro</label>
+                {touched.nrovoladura && errors.nrovoladura && <span>{errors.nrovoladura}</span>}
+                <label htmlFor="nrotaladros">nro de Taladros</label>
                 <input
                     type="number"
-                    {...getFieldProps('pprofundidadTaladro')} />
+                    {...getFieldProps('nrotaladros')} />
 
-                {touched.profundidadTaladro && errors.profundidadTaladro && <span>{errors.profundidadTaladro}</span>}
+                {touched.nrovoladura && errors.nrovoladura && <span>{errors.nrovoladura}</span>}
+                <label htmlFor="profundidadtaladro">Profundidad de Taladro</label>
+                <input
+                    type="number"
+                    {...getFieldProps('profundidadtaladro')} />
+
+                {touched.profundidadtaladro && errors.profundidadtaladro && <span>{errors.profundidadtaladro}</span>}
                 
-                <label htmlFor="distancia">Densidad</label>
+                <label htmlFor="densidad">Densidad</label>
                 <input
                     type="number"
                     {...getFieldProps('densidad')} />
                 {touched.densidad && errors.densidad && <span>{errors.densidad}</span>}
 
-                <label htmlFor="sobrePerforacion">Sobre Perforacion</label>
+                <label htmlFor="sobreperforacion">Sobre Perforacion</label>
                 <input
                     type="number"
-                    {...getFieldProps('sobrePerforacion')} />
-                {touched.sobrePerforacion && errors.sobrePerforacion && <span>{errors.sobrePerforacion}</span>}
+                    {...getFieldProps('sobreperforacion')} />
+                {touched.sobreperforacion && errors.sobreperforacion && <span>{errors.sobreperforacion}</span>}
 
                 <label htmlFor="agua">Agua</label>
                 <input
@@ -107,66 +124,66 @@ export const FormularioVod = () => {
                     {...getFieldProps('agua')} />
                 {touched.agua && errors.agua && <span>{errors.agua}</span>}
 
-                <label htmlFor="vppDiseno">Taco</label>
+                <label htmlFor="taco">Taco</label>
                 <input
                     type="number"
                     {...getFieldProps('taco')} />
                 {touched.taco && errors.taco && <span>{errors.taco}</span>}
 
-                <label htmlFor="tipoTaco">Tipo de Taco</label>
+                <label htmlFor="tipotaco">Tipo de Taco</label>
                 <input
                     type="text"
-                    {...getFieldProps('k')} />
-                {touched.tipoTaco && errors.tipoTaco && <span>{errors.tipoTaco}</span>}
+                    {...getFieldProps('tipotaco')} />
+                {touched.tipotaco && errors.tipotaco && <span>{errors.tipotaco}</span>}
 
-                <label htmlFor="longitudCarga">Longitud de Carga</label>
+                <label htmlFor="longitudcarga">Longitud de Carga</label>
                 <input
                     type="number"
-                    {...getFieldProps('longitudCarga')} />
-                {touched.longitudCarga && errors.longitudCarga && <span>{errors.longitudCarga}</span>}
+                    {...getFieldProps('longitudcarga')} />
+                {touched.longitudcarga && errors.longitudcarga && <span>{errors.longitudcarga}</span>}
                 
                 <label htmlFor="booster">Booster</label>
                 <input
-                    type="numerico"
+                    type="number"
                     {...getFieldProps('booster')} />
                 {touched.booster && errors.booster && <span>{errors.booster}</span>}
                 
-                <label htmlFor="tipoDetonador">Tipo de Detonador</label>
+                <label htmlFor="tipodetonador">Tipo de Detonador</label>
                 <input
                     type="text"
-                    {...getFieldProps('tipoDetonador')} />
-                {touched.tipoDetonador && errors.tipoDetonador && <span>{errors.tipoDetonador}</span>}
+                    {...getFieldProps('tipodetonador')} />
+                {touched.tipodetonador && errors.tipodetonador && <span>{errors.tipodetonador}</span>}
                 
-                <label htmlFor="tipoExplosivo">Tipo de Explosivo</label>
+                <label htmlFor="tipoexplosivo">Tipo de Explosivo</label>
                 <input
                     type="text"
-                    {...getFieldProps('tipoExplosivo')} />
-                {touched.tipoExplosivo && errors.tipoExplosivo && <span>{errors.tipoExplosivo}</span>}
+                    {...getFieldProps('tipoexplosivo')} />
+                {touched.tipoexplosivo && errors.tipoexplosivo && <span>{errors.tipoexplosivo}</span>}
                 
-                <label htmlFor="vodPromedio">VOD Promedio (m/s)</label>
+                <label htmlFor="vodpromedio">VOD Promedio (m/s)</label>
                 <input
-                    type="text"
-                    {...getFieldProps('vodPromedio')} />
-                {touched.vodPromedio && errors.vodPromedio && <span>{errors.vodPromedio}</span>}
+                    type="number"
+                    {...getFieldProps('vodpromedio')} />
+                {touched.vodpromedio && errors.vodpromedio && <span>{errors.vodpromedio}</span>}
                 
                 <label htmlFor="probecable ">ProbeCable</label>
                 <input
-                    type="text"
-                    {...getFieldProps('probecable ')} />
+                    type="boolean"
+                    {...getFieldProps('probecable')} />
                 {touched.probecable  && errors.probecable  && <span>{errors.probecable }</span>}
-                <label htmlFor="cableCoaxial ">Cable Coaxial(m)</label>
-                <input
-                    type="text"
-                    {...getFieldProps('cableCoaxial ')} />
-                {touched.cableCoaxial  && errors.cableCoaxial  && <span>{errors.cableCoaxial }</span>}
-                <label htmlFor="diametro ">Diametro(mm)</label>
-                <input
-                    type="text"
-                    {...getFieldProps('diametro ')} />
-                {touched.diametro  && errors.diametro  && <span>{errors.diametro }</span>}
 
+                <label htmlFor="cablecoaxial">Cable Coaxial(m)</label>
+                <input
+                    type="number"
+                    {...getFieldProps('cablecoaxial')} />
+                {touched.cablecoaxial  && errors.cablecoaxial  && <span>{errors.cablecoaxial }</span>}
+     
 
-                <button type="submit">Submit</button>
+                {
+                    data.vid?
+                    <button style={{width:90}} className='btn btn-primary' type="submit" >Actualizar</button>:
+                    <button style={{width:90}} className='btn btn-primary' type="submit" >Guardar</button>
+                }
 
             </form>
 

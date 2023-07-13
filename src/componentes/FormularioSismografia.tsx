@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FormikErrors, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Sismografia } from '../interfaces.tsx/interfaces';
 
@@ -48,7 +48,7 @@ export const FormularioSismografia = (data:Sismografia) => {
                         required('Requerido'),
             cargaoperante: Yup.number().
                         required('Requerido'),
-          
+                            
             vppdiseno: Yup.number().
                         required('Requerido'),
           

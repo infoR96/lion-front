@@ -1,35 +1,21 @@
 import React from 'react'
 import {
   FormularioVod,
-  TableSismografia,
   TableVod,
 } from '../componentes';
 
 
 export const Vod = () => {
   return (
-    <div className="container">
+    <div >
       <div className=" row justify-content-center">
         <h1>VELOCIDAD DE DETONACION</h1>
-        <TableVod total={3} voladuras={[{
-          nroVoladura: 7140,
-          nroTaladro: 124,
-          profundidadTaladro: 10,
-          densidad: 1.33,
-          sobrePerforacion: 0.5,
-          agua: true,
-          taco: 5.8,
-          tipoTaco: 'Detritus',
-          longitudCarga: 4.7,
-          booster: 900,
-          tipoDetonador: 'NO ELECTRICO',
-          tipoExplosivo: 'RIOFLEX 700',
-          vodPromedio: 6754,
-          probecable: 1,
-          cableCoaxial: 30,
-          diametro: 40
-
-        }]} />
+        <FormularioVod nrovoladura={0} nrotaladros={0} 
+        profundidadtaladro={0} densidad={0} sobreperforacion={0}
+         agua={false} taco={0} tipotaco={''} longitudcarga={0}
+         booster={0} tipodetonador={''} tipoexplosivo={''} 
+         vodpromedio={0} probecable={false} cablecoaxial={0} vid={''}/>
+        <TableVod />
       </div>
     </div>
   );

@@ -12,13 +12,14 @@ interface VoladuraProps {
 
 const voladuranicialState: Voladura = {
     densidad: {
-        registrado: false,
-        horaInicio: '',
-        horaFin: '',
-        tipoMezcla: '',
-        densidadIninicial:0,
-        densidadFinal:0 ,
-        camion: ''
+        nrovoladura:0 ,
+        horainicio: '',
+        horafin: '',
+        tipomezcla: '',
+        densidadinicial:0,
+        densidadfinal:0 ,
+        camion: '',
+        vid:''
 
  },
  generalData:{
@@ -30,22 +31,22 @@ const voladuranicialState: Voladura = {
     vid:''
  },
  vod:{
-    registrado:false,
-    nroTaladro: 124,
-    profundidadTaladro: 10,
+     nrovoladura:3,
+    nrotaladros: 124,
+    profundidadtaladro: 10,
     densidad: 1.33,
-    sobrePerforacion: 0.5,
+    sobreperforacion: 0.5,
     agua: true,
     taco: 5.8,
-    tipoTaco: 'Detritus',
-    longitudCarga: 4.7,
+    tipotaco: 'Detritus',
+    longitudcarga: 4.7,
     booster: 900,
-    tipoDetonador: 'NO ELECTRICO',
-    tipoExplosivo: 'RIOFLEX 7000',
-    vodPromedio: 6754,
-    probecable: 1,
-    cableCoaxial: 30,
-    diametro: 9
+    tipodetonador: 'NO ELECTRICO',
+    tipoexplosivo: 'RIOFLEX 7000',
+    vodpromedio: 6754,
+    probecable: true,
+    cablecoaxial: 30,
+    vid:''
 },
  sismografia:{
     nrovoladura:0,
@@ -110,13 +111,14 @@ export const VoladuraProvider = ({ children }: any) => {
     const getDesnsidad = async (nro:Number) => {
         try {
             const resp:Densidad ={
-                registrado: false,
-                horaInicio: '8:45',
-                horaFin: '9:00',
-                tipoMezcla: 'ANFO',
-                densidadIninicial: 0.771,
-                densidadFinal: 1.06,
-                camion: 'MACK'
+                nrovoladura:0,
+                horainicio: '8:45',
+                horafin: '9:00',
+                tipomezcla: 'ANFO',
+                densidadinicial: 0.771,
+                densidadfinal: 1.06,
+                camion: 'MACK',
+                vid:''
             }
             
             dispathc({

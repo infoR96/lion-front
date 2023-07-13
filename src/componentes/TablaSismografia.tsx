@@ -58,8 +58,6 @@ export const TableSismografia: React.FC = () => {
   const editData = (sismografialSelect: Sismografia) => {
     handleShow();
     getVid(sismografialSelect)
-    console.log('DATOSSSS', sismografialSelect)
-    console.log('DATOSSSS', initstate)
 
   }
 

@@ -1,95 +1,115 @@
-import { Formik,Field, Form, useField, ErrorMessage } from 'formik';
+import axios from 'axios';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { Densidad } from '../interfaces.tsx/interfaces';
 
-export const FormularioDensidad = () => {
-  
-    return (
-        <div className='col my-4'>
-            <Formik initialValues={{
-                   nroVoladura: 34,
-                   registrado: true,
-                   horaInicio: '8:45',
-                   horaFin: '9:00',
-                   tipoMezcla: 'ANFO',
-                   densidadIninicial: 0.771,
-                   densidadFinal: 1.06,
-                   camion: 'MACK'
-
-            }}
-            onSubmit={(values)=>{
-                console.log(values)
-            }}
-            validationSchema={ Yup.object({
-                nroVoladura: Yup.number()
+export const FormularioDensidad = (data:Densidad) => {
+    const {  values, errors, handleSubmit, touched, getFieldProps } = useFormik({
+        initialValues: data || {
+            nrovoladura: 34,
+            horainicio: '8:45',
+            horafin: '9:00',
+            tipomezcla: 'ANFO',
+            densidadinicial: 0.771,
+            densidadfinal: 1.06,
+            camion: 'MACK' 
+        },   
+        onSubmit: (data) => {
+            if(!data.vid){
+                axios.post(`${process.env.REACT_APP_API_URL}/densidad`, data)
+                    .then(response => {
+                        console.log('Se envió la información correctamente', response.data);
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.log('Error al enviar la información', error);
+                    });
+                }else{
+                    axios.put(`${process.env.REACT_APP_API_URL}/densidad/${data.vid}`, data)
+                    .then(response => {
+                        console.log('Se envió la información correctamente', response.data);
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        console.log('Error al enviar la información', error);
+                    });
+                }
+        },
+            validationSchema:Yup.object({
+                nrovoladura: Yup.number()
                     .required(),
-    
-                registrado: Yup.boolean().
+                horainicio: Yup.string().
                     required('Requerido'),
-                horaInicio: Yup.number().
+                horafin: Yup.string().
                     required('Requerido'),
-                horaFin: Yup.string().
+                tipomezcla: Yup.string().
                     required('Requerido'),
-                tipoMezcla: Yup.string().
+                densidadinicial: Yup.number().
                     required('Requerido'),
-                densidadIninicial: Yup.number().
-                    required('Requerido'),
-                densidadFinal: Yup.number().
+                densidadfinal: Yup.number().
                     required('Requerido'),
                 camion: Yup.string().
                     required('Requerido'),
-            })}>
-
-            {
-                formik=>(
-                    <Form>
-                    <label htmlFor="nroVoladura">nroVoladura</label>
-                    <Field name="nroVoladura" type='number'/>
-                    <ErrorMessage name="nroVoladura" component='span'/>
-
-                    <label htmlFor="burden">Registrado</label>
-                    <Field name='registrado' type="boolean"/>
-                    <ErrorMessage name='registrado'/>
-                    
-                    <label htmlFor="horaInicio">Hora de Inicio</label>
-                    <Field name='horaInicio' type="text"/>
-                    <ErrorMessage name='horaInicio'/>
-
-                    <label htmlFor="horaFin">Hora de Fin</label>
-                    <Field name='horaFin' type="text"/>
-                    <ErrorMessage name='horaFin'/>
-                
-                    <label htmlFor="tipoMezcla">Tipo de Mezcla</label>
-                    <Field name='tipoMezcla' type="text"/>
-                    <ErrorMessage name='tipoMezcla'/>
-                  
-                    <label htmlFor="densidadInicial">Densidad Inicial</label>
-                    <Field name='densidadInicial' type="number"/>
-                    <ErrorMessage name='densidadInicial'/>
-
-                    <label htmlFor="densidadFinal">Densidad Final</label>
-                    <Field name='densidadFinal' type="number"/>
-                    <ErrorMessage name='densidadFinal'/>
-
-                    <label htmlFor="camion">Camion</label>
-                    <Field name='camion' type="number"/>
-                    <ErrorMessage name='camion'/>
-                    
-    
-    
             
-    
-                    <button type="submit">Submit</button>
-    
-                </Form>
-                )
+                })
+            });
 
-                
-            }
-            
 
-            </Formik>
+            return (
+                <div className='col my-4'>
+                    <form onSubmit={handleSubmit} noValidate>
+                        <label htmlFor="nrovoladura">nroVoladura</label>
+                        <input
+                            type="number"
+                            {... getFieldProps('nrovoladura')}/>
+        
+                        {touched.nrovoladura && errors.nrovoladura && <span>{errors.nrovoladura}</span>}
 
-        </div>
-    
-  )
+                        <label htmlFor="horainicio">Hora de Inicio</label>
+                        <input
+                            type="string"
+                            {... getFieldProps('horainicio')}/>
+                        
+                        {touched.horainicio && errors.horainicio && <span>{errors.horainicio}</span>}
+                        <label htmlFor="horafin">Hora de Fin</label>
+                        <input
+                            type="string"
+                            {... getFieldProps('horafin')}/>
+                            {touched.horafin && errors.horafin && <span>{errors.horafin}</span>}
+        
+                        <label htmlFor="tipomezcla">Tipo de Mezcla</label>
+                        <input
+                            type="string"
+                            {... getFieldProps('tipomezcla')}/>
+                            {touched.tipomezcla && errors.tipomezcla && <span>{errors.tipomezcla}</span>}
+                        
+                        <label htmlFor="densidadinicial">Densidad Inicial</label>
+                        <input
+                            type="number"
+                            {... getFieldProps('densidadinicial')}/>
+                            {touched.densidadinicial && errors.densidadinicial && <span>{errors.densidadinicial}</span>}
+                       
+                        <label htmlFor="densidadfinal">Densidad Final</label>
+                        <input
+                            type="number"
+                            {... getFieldProps('densidadfinal')}/>
+                            {touched.densidadfinal && errors.densidadfinal && <span>{errors.densidadfinal}</span>}
+                        
+                        <label htmlFor="camion">Camion</label>
+                        <input
+                            type="sting"
+                            {... getFieldProps('camion')}/>
+                            {touched.camion && errors.camion && <span>{errors.camion}</span>}
+               
+        
+                            {
+                            data.vid?
+                            <button style={{width:90}} className='btn btn-primary' type="submit" >Actualizar</button>:
+                            <button style={{width:90}} className='btn btn-primary' type="submit">Guardar</button>
+                        }
+        
+                    </form>
+        
+                </div>
+            )
 }

@@ -1,12 +1,13 @@
 
 export interface Densidad {
-    registrado: boolean;
-    horaInicio: string,
-    horaFin: string,
-    tipoMezcla: string,
-    densidadIninicial: number,
-    densidadFinal: number,
-    camion: string
+    nrovoladura:number,
+    horainicio: string,
+    horafin: string,
+    tipomezcla: string,
+    densidadinicial: number,
+    densidadfinal: number,
+    camion: string,
+    vid:string
 }
 
 export interface DisenoPer {
@@ -46,22 +47,22 @@ export interface Sismografia{
 
 }
 export interface Vod {
-    registrado: boolean;
-    nroTaladro:number;
-    profundidadTaladro:number;
+    nrovoladura:number;
+    nrotaladros:number;
+    profundidadtaladro:number;
     densidad:number;
-    sobrePerforacion:number;
+    sobreperforacion:number;
     agua:boolean;
     taco:number;
-    tipoTaco:string;
-    longitudCarga:number;
+    tipotaco:string;
+    longitudcarga:number;
     booster:number;
-    tipoDetonador:string;
-    tipoExplosivo:string;
-    vodPromedio:number;
-    probecable:number;
-    cableCoaxial:number;
-    diametro:number;
+    tipodetonador:string;
+    tipoexplosivo:string;
+    vodpromedio:number;
+    probecable:boolean;
+    cablecoaxial:number;
+    vid:string;
 }
 export interface GeneralData{
     nrovoladura: number;

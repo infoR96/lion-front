@@ -1,16 +1,15 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { FormularioSismografia } from './FormularioSismografia';
-import { Sismografia } from '../interfaces.tsx/interfaces';
-import { da } from 'date-fns/locale';
+import { Densidad, Sismografia } from '../interfaces.tsx/interfaces';
+import { FormularioDensidad } from './FormularioDensidad';
 
 type ModalProps = {
   show:boolean;
-  data: Sismografia;
+  data: Densidad;
   handleClose:()=>void; 
 }
 
-export const ModalEditSismografia =({handleClose,data,show}:ModalProps) => {
+export const ModalEditDensidad =({handleClose,data,show}:ModalProps) => {
   return (
     <>
       <Modal
@@ -23,9 +22,10 @@ export const ModalEditSismografia =({handleClose,data,show}:ModalProps) => {
           <Modal.Title >Editar datos</Modal.Title>
         </Modal.Header>
         <Modal.Body className='bg-dark'>
-            <FormularioSismografia nrovoladura={data.nrovoladura} ptomoni={data.ptomoni}
-             distancia={data.distancia} cargaoperante={data.cargaoperante}
-              vppdiseno={data.vppdiseno} vppreal={data.vppreal} k={data.k} alpha={data.alpha} vid={data.vid}/>
+            <FormularioDensidad nrovoladura={data.nrovoladura} 
+            horainicio={data.horainicio} horafin={data.horafin}
+             tipomezcla={data.tipomezcla} densidadinicial={data.densidadinicial}
+              densidadfinal={data.densidadfinal} camion={data.camion} vid={data.vid} />
         </Modal.Body>
         <Modal.Footer className='bg-dark'>
           <Button variant="secondary" onClick={handleClose}>

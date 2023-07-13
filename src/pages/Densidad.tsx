@@ -7,17 +7,8 @@ export const Densidad = () => {
     <div className="container">
     <div  className=" row justify-content-center">
     <h1>CONTROL DE DENSIDAD</h1>
-      <FormularioDensidad />
-      <TableDensidad  total={3}  voladuras={[{
-      nroVoladura:45, 
-      registrado: true,
-      horaInicio: '8:45',
-      horaFin: '9:00',
-      tipoMezcla: 'ANFO',
-      densidadIninicial: 0.771,
-      densidadFinal: 1.06,
-      camion: 'MACK'
-    }]}/>
+      <FormularioDensidad nrovoladura={0} horainicio={''} horafin={''} tipomezcla={''} densidadinicial={0} densidadfinal={0} camion={''} vid={''} />
+      <TableDensidad />
     </div>
     </div>
   )

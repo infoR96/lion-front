@@ -77,3 +77,10 @@ span, .error-message {
 .modal-select{
     width: 90%;
 }
+
+/* Estilos para la tabla de VOD */
+
+.tablevod{
+  width: 100%;
+  background-color: red;
+}
